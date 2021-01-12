@@ -2,35 +2,45 @@ package com.epam.esm.model;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class GiftCertificate {
     private int id;
     private String name;
+    private String description;
     private BigDecimal price;
     private int daysDuration;
-    private SimpleDateFormat createDate;
-    private SimpleDateFormat lastUpdateDate;
+    private LocalDateTime createDate;
+    private LocalDateTime lastUpdateDate;
 
     public GiftCertificate() {
     }
 
-    public GiftCertificate(String name, BigDecimal price, int daysDuration, SimpleDateFormat createDate, SimpleDateFormat lastUpdateDate) {
+    public GiftCertificate(String name, String description, BigDecimal price, int daysDuration, LocalDateTime createDate, LocalDateTime lastUpdateDate) {
         this.name = name;
+        this.description = description;
         this.price = price;
         this.daysDuration = daysDuration;
         this.createDate = createDate;
         this.lastUpdateDate = lastUpdateDate;
     }
 
-    public GiftCertificate(int id, String name, BigDecimal price, int daysDuration, SimpleDateFormat createDate
-            , SimpleDateFormat lastUpdateDate) {
+    public GiftCertificate(int id, String name, String description, BigDecimal price, int daysDuration, LocalDateTime createDate, LocalDateTime lastUpdateDate) {
         this.id = id;
         this.name = name;
+        this.description = description;
         this.price = price;
         this.daysDuration = daysDuration;
         this.createDate = createDate;
         this.lastUpdateDate = lastUpdateDate;
+    }
+
+    public GiftCertificate(String name, String description, BigDecimal price, int daysDuration) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.daysDuration = daysDuration;
     }
 
     public int getId() {
@@ -65,20 +75,28 @@ public class GiftCertificate {
         this.daysDuration = daysDuration;
     }
 
-    public SimpleDateFormat getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(SimpleDateFormat createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
-    public SimpleDateFormat getLastUpdateDate() {
+    public LocalDateTime getLastUpdateDate() {
         return lastUpdateDate;
     }
 
-    public void setLastUpdateDate(SimpleDateFormat lastUpdateDate) {
+    public void setLastUpdateDate(LocalDateTime lastUpdateDate) {
         this.lastUpdateDate = lastUpdateDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
@@ -86,12 +104,12 @@ public class GiftCertificate {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GiftCertificate that = (GiftCertificate) o;
-        return id == that.id && daysDuration == that.daysDuration && Objects.equals(name, that.name) && Objects.equals(price, that.price) && Objects.equals(createDate, that.createDate) && Objects.equals(lastUpdateDate, that.lastUpdateDate);
+        return id == that.id && daysDuration == that.daysDuration && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(price, that.price) && Objects.equals(createDate, that.createDate) && Objects.equals(lastUpdateDate, that.lastUpdateDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price, daysDuration, createDate, lastUpdateDate);
+        return Objects.hash(id, name, description, price, daysDuration, createDate, lastUpdateDate);
     }
 
     @Override
@@ -99,10 +117,11 @@ public class GiftCertificate {
         return "GiftCertificate{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
                 ", price=" + price +
                 ", daysDuration=" + daysDuration +
                 ", createDate=" + createDate +
-                ", lastupdateDate=" + lastUpdateDate +
+                ", lastUpdateDate=" + lastUpdateDate +
                 '}';
     }
 }

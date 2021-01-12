@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Certificate List</title>
+</head>
+<body>
+
+<p>Index page with list</p>
+
+<div th:each="certificate : ${certificateList}">
+   <a th:href="@{/certificates/{id}(id=${certificate.getId()})}" th:text="${certificate.name}">certificate</a>
+
+</div>
+
+
+</body>
+</html>
