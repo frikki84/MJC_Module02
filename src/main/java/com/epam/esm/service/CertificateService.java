@@ -30,6 +30,7 @@ public class CertificateService {
         LocalDateTime currentDate = LocalDateTime.now();
         certificate.setCreateDate(currentDate);
         certificate.setLastUpdateDate(currentDate);
+
         certificateDao.createNewCertificate(certificate);
     }
 

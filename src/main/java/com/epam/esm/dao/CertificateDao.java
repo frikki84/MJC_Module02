@@ -10,17 +10,18 @@ import java.util.List;
 
 @Component
 public class CertificateDao {
+    private static int count = 0;
     private List<GiftCertificate> certificateList;
 
     {
         certificateList = new ArrayList<>();
-        certificateList.add(new GiftCertificate(1, "spa", "for 2 person", new BigDecimal(150),
+        certificateList.add(new GiftCertificate(++count, "spa", "for 2 person", new BigDecimal(150),
                 60, LocalDateTime.now(),
                 LocalDateTime.now()));
-        certificateList.add(new GiftCertificate(2, "ralli", "for 2 person", new BigDecimal(500),
+        certificateList.add(new GiftCertificate(++count, "ralli", "for 2 person", new BigDecimal(500),
                 60, LocalDateTime.now(),
                 LocalDateTime.now()));
-        certificateList.add(new GiftCertificate(3, "dinner", "for 2 person", new BigDecimal(100),
+        certificateList.add(new GiftCertificate(++count, "dinner", "for 2 person", new BigDecimal(100),
                 60, LocalDateTime.now(),
                 LocalDateTime.now()));
     }
@@ -34,6 +35,7 @@ public class CertificateDao {
     }
 
     public void createNewCertificate(GiftCertificate certificate) {
+        certificate.setId(++count);
         certificateList.add(certificate);
     }
 

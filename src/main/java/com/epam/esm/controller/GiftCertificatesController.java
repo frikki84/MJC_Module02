@@ -51,7 +51,7 @@ public class GiftCertificatesController {
     }
 
     @GetMapping("/{id}/edit")
-    public String editSertificate(Model model, @PathVariable("id") int id) {
+    public String editCertificate(Model model, @PathVariable("id") int id) {
         GiftCertificate certificate = certificateService.findCertificateById(id);
         model.addAttribute("certificate", certificate);
         return PATH_TO_EDIT_CERTIFICATE;
@@ -63,7 +63,7 @@ public class GiftCertificatesController {
         return PATH_TO_MAIN_PAGE;
     }
 
-    @DeleteMapping("/{id")
+    @DeleteMapping("/{id}")
     public String  deleteCertificate(@PathVariable("id") int id) {
         certificateService.deleteCertificate(id);
         return PATH_TO_MAIN_PAGE;

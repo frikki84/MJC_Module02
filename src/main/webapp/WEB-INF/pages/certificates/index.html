@@ -11,7 +11,8 @@
 <p>Index page with list</p>
 
 <div th:each="certificate : ${certificateList}">
-   <a th:href="@{/certificates/{id}(id=${certificate.getId()})}" th:text="${certificate.name}">certificate</a>
+   <a th:href="@{/certificates/{id}(id=${certificate.getId()})}"
+      th:text="${certificate.getId() + '. ' + certificate.getName()+ ' --- ' + certificate.getCreateDate()}">certificate</a>
 
 </div>
 
