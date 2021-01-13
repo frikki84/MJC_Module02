@@ -47,6 +47,10 @@ public class CertificateDao {
         certificateFromDb.setLastUpdateDate(updatedCertificate.getLastUpdateDate());
     }
 
+    public void deleteCertificate(int id) {
+        certificateList.removeIf(certificate -> certificate.getId()==id);
+    }
+
 
 
 

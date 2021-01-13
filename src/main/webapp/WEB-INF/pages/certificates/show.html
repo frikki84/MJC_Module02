@@ -29,7 +29,15 @@
 </div>
 <br/>
 
-    <a th:href="@{/certificates/{id}/edit(id=${certificate.getId()})}">Edit info</a>
+<a th:href="@{/certificates/{id}/edit(id=${certificate.getId()})}">Edit info</a>
+<br/>
+<br/>
+
+<form th:method="delete" th:action="@{/certificates/{id}(id=${certificate.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+
+
 
 </body>
 </html>

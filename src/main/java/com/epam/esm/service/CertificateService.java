@@ -39,6 +39,10 @@ public class CertificateService {
         certificateDao.updateCertificate(certificate, id);
     }
 
+    public void deleteCertificate(int id) {
+        certificateDao.deleteCertificate(id);
+    }
+
 
 
 }

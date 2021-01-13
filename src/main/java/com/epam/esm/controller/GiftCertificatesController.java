@@ -63,6 +63,12 @@ public class GiftCertificatesController {
         return PATH_TO_MAIN_PAGE;
     }
 
+    @DeleteMapping("/{id")
+    public String  deleteCertificate(@PathVariable("id") int id) {
+        certificateService.deleteCertificate(id);
+        return PATH_TO_MAIN_PAGE;
+    }
+
 
 }
 

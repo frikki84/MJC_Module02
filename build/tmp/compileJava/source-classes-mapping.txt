@@ -1,7 +1,3 @@
-com/epam/esm/config/SpringConfig.java
- com.epam.esm.config.SpringConfig
-com/epam/esm/model/GiftCertificate.java
- com.epam.esm.model.GiftCertificate
 com/epam/esm/config/MyServletDispatcher.java
  com.epam.esm.config.MyServletDispatcher
 com/epam/esm/dao/CertificateDao.java
@@ -10,3 +6,7 @@ com/epam/esm/controller/GiftCertificatesController.java
  com.epam.esm.controller.GiftCertificatesController
 com/epam/esm/service/CertificateService.java
  com.epam.esm.service.CertificateService
+com/epam/esm/config/SpringConfig.java
+ com.epam.esm.config.SpringConfig
+com/epam/esm/model/GiftCertificate.java
+ com.epam.esm.model.GiftCertificate
