@@ -7,7 +7,6 @@
 group 'com.epam.esm'
 version '1.0'
 
- sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -26,6 +25,7 @@ dependencies {
     compile group: 'org.apache.tomcat', name: 'tomcat', version: '10.0.0', ext: 'pom'
     compile group: 'org.apache.tomcat', name: 'tomcat-jasper', version: '10.0.0'
     compile group: 'org.apache.tomcat', name: 'tomcat-catalina', version: '10.0.0'
+    compile group: 'org.hibernate.validator', name: 'hibernate-validator', version: '6.2.0.Final'
 
 }
 

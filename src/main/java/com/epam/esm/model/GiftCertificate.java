@@ -1,5 +1,6 @@
 package com.epam.esm.model;
 
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -7,10 +8,21 @@ import java.util.Objects;
 
 public class GiftCertificate {
     private int id;
+
+    @NotEmpty(message = "The field can't be empty")
+    @Size(min = 3, max = 20, message = "The certificate name could be between 3 and 20 symbols")
     private String name;
+
+    @NotEmpty(message = "Please, write the certificate description")
+    @Size(min = 5, max = 100, message = "Description could be between 5 and 100 symbols")
     private String description;
+
+    @DecimalMin(value = "0", message = "Enter certificate price")
     private BigDecimal price;
+
+    @Positive(message = "Duration could be at least 1 day")
     private int daysDuration;
+
     private LocalDateTime createDate;
     private LocalDateTime lastUpdateDate;
 
