@@ -1,2 +1,0 @@
-com/epam/esm/controller/MainControllerTest.java
- com.epam.esm.controller.MainControllerTest

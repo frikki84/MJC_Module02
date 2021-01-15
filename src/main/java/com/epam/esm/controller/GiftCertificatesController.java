@@ -50,20 +50,22 @@ public class GiftCertificatesController {
 //    }
 
     @PostMapping()
-    public void createNewCertificate(@ModelAttribute("certificate") @Valid GiftCertificate certificate) {
+    @ResponseBody
+    public void createNewCertificate(@RequestBody @Valid GiftCertificate certificate) {
         System.out.println("Controller post: " + certificate);
         certificateService.createNewCertificate(certificate);
     }
 
-    @GetMapping("/{id}/edit")
-    public String editCertificate(Model model, @PathVariable("id") int id) {
-        GiftCertificate certificate = certificateService.findCertificateById(id);
-        model.addAttribute("certificate", certificate);
-        return PATH_TO_EDIT_CERTIFICATE;
-    }
+//    @GetMapping("/{id}/edit")
+//    public String editCertificate(Model model, @PathVariable("id") int id) {
+//        GiftCertificate certificate = certificateService.findCertificateById(id);
+//        model.addAttribute("certificate", certificate);
+//        return PATH_TO_EDIT_CERTIFICATE;
+//    }
 
     @PatchMapping("/{id}")
-    public void updateCertificate(@ModelAttribute("certificate") @Valid GiftCertificate certificate, BindingResult bindingResult, @PathVariable("id") int id) {
+    @ResponseBody
+    public void updateCertificate(@RequestBody @Valid GiftCertificate certificate, BindingResult bindingResult, @PathVariable("id") int id) {
 //        if (bindingResult.hasErrors()) {
 //            return PATH_TO_ERROR_PAGE;
 //        }
