@@ -60,7 +60,6 @@ public class SpringConfig implements WebMvcConfigurer {
         driverManagerDataSource.setUrl("jdbc:mysql://127.0.0.1:3306/module02?serverTimezone=UTC&useSSL=false");
         driverManagerDataSource.setUsername("root");
         driverManagerDataSource.setPassword("24081984");
-
         return  driverManagerDataSource;
     }
 
