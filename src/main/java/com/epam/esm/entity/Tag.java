@@ -1,12 +1,18 @@
 package com.epam.esm.entity;
 
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
+
+@ResponseBody
 public class Tag {
     private int id;
 
-    @NotBlank
+    @NotBlank(message = "The field can't be empty")
+    @Size(min = 3, max = 20, message = "The certificate name could be between 3 and 20 symbols")
     private String name;
 
     public Tag() {
@@ -22,6 +28,14 @@ public class Tag {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

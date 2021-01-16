@@ -1,16 +1,46 @@
 com/epam/esm/config/MyServletDispatcher.java
  com.epam.esm.config.MyServletDispatcher
-com/epam/esm/config/SpringConfig.java
- com.epam.esm.config.SpringConfig
 com/epam/esm/dao/CertificateDao.java
  com.epam.esm.dao.CertificateDao
 com/epam/esm/controller/MainTest.java
  com.epam.esm.controller.MainTest
+com/epam/esm/service/TagService.java
+ com.epam.esm.service.TagService
+com/epam/esm/entity/GiftCertificate.java
+ com.epam.esm.entity.GiftCertificate
+com/epam/esm/entity/GiftCertificateDataTransferObject.java
+ com.epam.esm.entity.GiftCertificateDataTransferObject
+com/epam/esm/service/serviceImpl/CertificateServiceImpl.java
+ com.epam.esm.service.serviceImpl.CertificateServiceImpl
+com/epam/esm/entity/Tag.java
+ com.epam.esm.entity.Tag
+com/epam/esm/config/SpringConfig.java
+ com.epam.esm.config.SpringConfig
+com/epam/esm/service/entitydtomapper/TagMapper.java
+ com.epam.esm.service.entitydtomapper.TagMapper
+com/epam/esm/service/entitydtomapper/CertificateMapper.java
+ com.epam.esm.service.entitydtomapper.CertificateMapper
+com/epam/esm/dao/impl/CertificateDaoImpl.java
+ com.epam.esm.dao.impl.CertificateDaoImpl
+com/epam/esm/service/entitydtomapper/impl/CertificateMapperImpl.java
+ com.epam.esm.service.entitydtomapper.impl.CertificateMapperImpl
+com/epam/esm/dao/mappers/CertificateMapper.java
+ com.epam.esm.dao.mappers.CertificateMapper
+com/epam/esm/dao/impl/TagDaoImpl.java
+ com.epam.esm.dao.impl.TagDaoImpl
+com/epam/esm/dao/TagDao.java
+ com.epam.esm.dao.TagDao
+com/epam/esm/entity/CertificateTagEntity.java
+ com.epam.esm.entity.CertificateTagEntity
 com/epam/esm/controller/GiftCertificatesController.java
  com.epam.esm.controller.GiftCertificatesController
 com/epam/esm/service/CertificateService.java
  com.epam.esm.service.CertificateService
-com/epam/esm/entity/GiftCertificate.java
- com.epam.esm.entity.GiftCertificate
-com/epam/esm/dao/CertificateMapper.java
- com.epam.esm.dao.CertificateMapper
+com/epam/esm/service/entitydtomapper/impl/TagMapperImpl.java
+ com.epam.esm.service.entitydtomapper.impl.TagMapperImpl
+com/epam/esm/dao/mappers/TagMapper.java
+ com.epam.esm.dao.mappers.TagMapper
+com/epam/esm/service/serviceImpl/TagServiceImpl.java
+ com.epam.esm.service.serviceImpl.TagServiceImpl
+com/epam/esm/controller/TagController.java
+ com.epam.esm.controller.TagController

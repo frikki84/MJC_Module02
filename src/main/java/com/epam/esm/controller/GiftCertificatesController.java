@@ -1,10 +1,8 @@
 package com.epam.esm.controller;
 
 import com.epam.esm.entity.GiftCertificate;
+import com.epam.esm.entity.GiftCertificateDataTransferObject;
 import com.epam.esm.service.CertificateService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,23 +13,23 @@ import java.util.List;
 //@Controller
 @RequestMapping("/certificates")
 public class GiftCertificatesController {
-    public static final String PATH_TO_CERTIFICATE_LIST_PAGE = "certificates/index";
-    public static final String PATH_TO_ONE_CERTIFICATE = "certificates/show";
-    public static final String PATH_TO_ADDING_NEW_CERTIFICATE = "certificates/new";
-    public static final String PATH_TO_MAIN_PAGE = "redirect:/certificates";
-    public static final String PATH_TO_EDIT_CERTIFICATE = "certificates/edit";
-    public static final String PATH_TO_ERROR_PAGE = "certificates/error";
+//    public static final String PATH_TO_CERTIFICATE_LIST_PAGE = "certificates/index";
+//    public static final String PATH_TO_ONE_CERTIFICATE = "certificates/show";
+//    public static final String PATH_TO_ADDING_NEW_CERTIFICATE = "certificates/new";
+//    public static final String PATH_TO_MAIN_PAGE = "redirect:/certificates";
+//    public static final String PATH_TO_EDIT_CERTIFICATE = "certificates/edit";
+//    public static final String PATH_TO_ERROR_PAGE = "certificates/error";
 
     private final CertificateService certificateService;
 
-    @Autowired
     public GiftCertificatesController(CertificateService certificateService) {
         this.certificateService = certificateService;
     }
 
+
     @GetMapping()
-    public List<GiftCertificate> readCertificates() {
-        List<GiftCertificate> fullCertificateList = certificateService.readCertificates();
+    public List<GiftCertificate> findAllCertificates() {
+        List<GiftCertificate> fullCertificateList = certificateService.findAllCertificates();
         //model.addAttribute("certificateList", fullCertificateList);
 
         return fullCertificateList;
@@ -51,9 +49,8 @@ public class GiftCertificatesController {
 
     @PostMapping()
     @ResponseBody
-    public void createNewCertificate(@RequestBody @Valid GiftCertificate certificate) {
-        System.out.println("Controller post: " + certificate);
-        certificateService.createNewCertificate(certificate);
+    public void createNewCertificate(@RequestBody @Valid GiftCertificateDataTransferObject certificateDto) {
+        certificateService.createNewCertificate(certificateDto);
     }
 
 //    @GetMapping("/{id}/edit")
@@ -74,9 +71,8 @@ public class GiftCertificatesController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteCertificate(@PathVariable("id") int id) {
+    public void deleteCertificate(@PathVariable("id") int id) {
         certificateService.deleteCertificate(id);
-        return PATH_TO_MAIN_PAGE;
     }
 
 

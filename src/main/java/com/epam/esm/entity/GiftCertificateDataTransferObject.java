@@ -1,6 +1,7 @@
 package com.epam.esm.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 
+@ResponseBody
 public class GiftCertificateDataTransferObject {
     private int id;
 
