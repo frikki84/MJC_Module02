@@ -3,6 +3,7 @@ package com.epam.esm.controller;
 import com.epam.esm.entity.GiftCertificate;
 import com.epam.esm.entity.GiftCertificateDataTransferObject;
 import com.epam.esm.service.CertificateService;
+import com.epam.esm.service.CertificateTagService;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,9 +22,11 @@ public class GiftCertificatesController {
 //    public static final String PATH_TO_ERROR_PAGE = "certificates/error";
 
     private final CertificateService certificateService;
+    private final CertificateTagService certificateTagService;
 
-    public GiftCertificatesController(CertificateService certificateService) {
+    public GiftCertificatesController(CertificateService certificateService, CertificateTagService certificateTagService) {
         this.certificateService = certificateService;
+        this.certificateTagService = certificateTagService;
     }
 
 
@@ -50,7 +53,7 @@ public class GiftCertificatesController {
     @PostMapping()
     @ResponseBody
     public void createNewCertificate(@RequestBody @Valid GiftCertificateDataTransferObject certificateDto) {
-        certificateService.createNewCertificate(certificateDto);
+        certificateTagService.createNewCertificateWithTags(certificateDto);
     }
 
 //    @GetMapping("/{id}/edit")

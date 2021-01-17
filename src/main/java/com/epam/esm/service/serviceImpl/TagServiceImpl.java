@@ -28,13 +28,19 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
+    public Tag findTagByName(String name) {
+        Tag tag = tagDao.findTagByName(name);
+        return  tag;
+    }
+
+    @Override
     public void deleteTag(int id) {
         tagDao.deleteTag(id);
-
     }
 
     @Override
     public void addNewTag(Tag tag) {
+
         tagDao.addNewTag(tag);
     }
 

@@ -5,8 +5,8 @@ import com.epam.esm.entity.GiftCertificate;
 import com.epam.esm.entity.GiftCertificateDataTransferObject;
 import com.epam.esm.entity.Tag;
 import com.epam.esm.service.CertificateService;
-import com.epam.esm.service.entitydtomapper.CertificateMapper;
-import com.epam.esm.service.entitydtomapper.TagMapper;
+import com.epam.esm.service.entitydtomapper.CertificateDtoMapper;
+import com.epam.esm.service.entitydtomapper.TagDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,14 +17,14 @@ import java.util.List;
 @Component
 public class CertificateServiceImpl implements CertificateService {
     private final CertificateDao certificateDao;
-    private final CertificateMapper certificateMapper;
-    private final TagMapper tagMapper;
+    private final CertificateDtoMapper certificateMapper;
+    private final TagDtoMapper tagDtoMapper;
 
     @Autowired
-    public CertificateServiceImpl(CertificateDao certificateDao, CertificateMapper certificateMapper, TagMapper tagMapper) {
+    public CertificateServiceImpl(CertificateDao certificateDao, CertificateDtoMapper certificateMapper, TagDtoMapper tagDtoMapper) {
         this.certificateDao = certificateDao;
         this.certificateMapper = certificateMapper;
-        this.tagMapper = tagMapper;
+        this.tagDtoMapper = tagDtoMapper;
     }
 
     public List<GiftCertificate> findAllCertificates() {
@@ -35,17 +35,11 @@ public class CertificateServiceImpl implements CertificateService {
         return certificateDao.findCertificateById(id);
     }
 
-    public void createNewCertificate(GiftCertificateDataTransferObject certificateDto) {
-       GiftCertificate giftCertificate = certificateMapper.changeDtoToCertificate(certificateDto);
-       addCurrentDateToCertificateInCreation(giftCertificate);
-       certificateDao.createNewCertificate(giftCertificate);
-
-       List<Tag> tagList = tagMapper.changeCertificateDtoToTagList(certificateDto);
-
-
-
-
-
+    public void createNewCertificate(GiftCertificate certificate) {
+        LocalDateTime currentDate = LocalDateTime.now();
+        certificate.setCreateDate(currentDate);
+        certificate.setLastUpdateDate(currentDate);
+        certificateDao.createNewCertificate(certificate);
     }
 
     public void updateCertificate(GiftCertificate certificate, int id) {
@@ -58,19 +52,11 @@ public class CertificateServiceImpl implements CertificateService {
         certificateDao.deleteCertificate(id);
     }
 
-    private GiftCertificate addCurrentDateToCertificateInCreation(GiftCertificate certificate) {
-        LocalDateTime currentDate = LocalDateTime.now();
-        certificate.setCreateDate(currentDate);
-        certificate.setLastUpdateDate(currentDate);
-        return  certificate;
+    @Override
+    public int findcertificateIdByCertificateInformation(GiftCertificate certificate) {
+        return 0;
     }
 
 
-
-
-
-
-
-
-
 }
+

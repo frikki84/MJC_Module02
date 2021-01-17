@@ -30,6 +30,12 @@ public class TagController {
         return tag;
     }
 
+    @GetMapping("/{name}")
+    public Tag findTagByName(@PathVariable("name") String name) {
+        Tag tag = tagService.findTagByName(name);
+        return tag;
+    }
+
     @PostMapping()
     @ResponseBody
     public void createNewTag(@RequestBody @Valid Tag tag) {

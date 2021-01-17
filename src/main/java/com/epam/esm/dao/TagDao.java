@@ -9,6 +9,8 @@ import java.util.List;
 public interface TagDao {
     public List<Tag> findAllTagList();
     public Tag findTagById(int id);
+    public Tag findTagByName(String name);
     public void addNewTag(Tag tag);
     public void deleteTag(int id);
+
 }

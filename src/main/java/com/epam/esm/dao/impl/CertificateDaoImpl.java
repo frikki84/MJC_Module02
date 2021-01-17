@@ -5,11 +5,14 @@ import com.epam.esm.entity.GiftCertificate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
+
 public class CertificateDaoImpl implements CertificateDao {
     public static final String SQL_QUERY_READ_CERTIFICATES_LIST = "Select * from gift_certicicate;";
     public static final String SQL_QUERY_READ_ONE_CERTIFICATE = "select * from gift_certicicate where id = ?";
@@ -18,6 +21,7 @@ public class CertificateDaoImpl implements CertificateDao {
     public static final String SQL_QUERY_UPDATE_CERTIFICATE = "update gift_certicicate set name=?, description=?" +
             ", price=?, duration=?, create_date=?, last_update_date=? where id = ?;";
     public static final String SQL_QUERY_DELETE_CERTIFICATE = "delete from gift_certicicate where id = ?;";
+    public static final String SQL_QUERY_FIND_CERTIFICATE_ID = "select id from gift_certicicate where create_date = ? and name like ?";
 
 
     private final JdbcTemplate template;
@@ -30,7 +34,6 @@ public class CertificateDaoImpl implements CertificateDao {
     public List<GiftCertificate> findAllCertificates() {
         List<GiftCertificate> certificateList = template.query(SQL_QUERY_READ_CERTIFICATES_LIST
                 , new BeanPropertyRowMapper<>(GiftCertificate.class));
-        System.out.println(certificateList);
         return certificateList;
     }
 
@@ -43,10 +46,16 @@ public class CertificateDaoImpl implements CertificateDao {
         return certificate;
     }
 
-    public void createNewCertificate(GiftCertificate certificate) {
-       template.update(SQL_QUERY_INSERT_CERTIFICATE, certificate.getName(), certificate.getDescription()
+    public int createNewCertificate(GiftCertificate certificate) {
+        GeneratedKeyHolder generatedKeyHolder = new GeneratedKeyHolder();
+
+        int id = template.update(SQL_QUERY_INSERT_CERTIFICATE, certificate.getName(), certificate.getDescription()
                 , certificate.getPrice(), certificate.getDaysDuration(), certificate.getCreateDate()
                 , certificate.getLastUpdateDate());
+
+        System.out.println("dao createNewCertificate " + id);
+
+        return id;
     }
 
     public void updateCertificate(GiftCertificate updatedCertificate, int id) {
@@ -59,6 +68,15 @@ public class CertificateDaoImpl implements CertificateDao {
     public void deleteCertificate(int id) {
         template.update(SQL_QUERY_DELETE_CERTIFICATE, id);
 
+    }
+
+    @Override
+    public int findcertificateIdByCertificateInformation(GiftCertificate certificate) {
+        int id = template.query(SQL_QUERY_FIND_CERTIFICATE_ID
+                , new Object[]{certificate.getCreateDate(), certificate.getName()}, new BeanPropertyRowMapper<>(GiftCertificate.class))
+                .stream().findAny().orElse(null).getId();
+
+        return id;
     }
 
 
