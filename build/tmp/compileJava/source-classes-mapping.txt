@@ -24,8 +24,6 @@ com/epam/esm/dao/mappers/TagMapper.java
  com.epam.esm.dao.mappers.TagMapper
 com/epam/esm/service/TagService.java
  com.epam.esm.service.TagService
-com/epam/esm/controller/MainTest.java
- com.epam.esm.controller.MainTest
 com/epam/esm/entity/GiftCertificateDataTransferObject.java
  com.epam.esm.entity.GiftCertificateDataTransferObject
 com/epam/esm/service/serviceImpl/CertificateServiceImpl.java
@@ -48,7 +46,11 @@ com/epam/esm/controller/GiftCertificatesController.java
  com.epam.esm.controller.GiftCertificatesController
 com/epam/esm/service/CertificateService.java
  com.epam.esm.service.CertificateService
+com/epam/esm/exception/DaoException.java
+ com.epam.esm.exception.DaoException
 com/epam/esm/service/entitydtomapper/impl/TagDtoMapperImpl.java
  com.epam.esm.service.entitydtomapper.impl.TagDtoMapperImpl
+com/epam/esm/controller/TestingMain.java
+ com.epam.esm.controller.TestingMain
 com/epam/esm/dao/impl/CertificateTagDaoImpl.java
  com.epam.esm.dao.impl.CertificateTagDaoImpl

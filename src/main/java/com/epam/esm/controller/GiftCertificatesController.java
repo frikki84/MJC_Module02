@@ -1,7 +1,7 @@
 package com.epam.esm.controller;
 
 import com.epam.esm.entity.GiftCertificate;
-import com.epam.esm.entity.GiftCertificateDataTransferObject;
+import com.epam.esm.entity.GiftCertificateDTO;
 import com.epam.esm.service.CertificateService;
 import com.epam.esm.service.CertificateTagService;
 import org.springframework.validation.BindingResult;
@@ -32,6 +32,7 @@ public class GiftCertificatesController {
 
     @GetMapping()
     public List<GiftCertificate> findAllCertificates() {
+        System.out.println("certificate controller get");
         List<GiftCertificate> fullCertificateList = certificateService.findAllCertificates();
         //model.addAttribute("certificateList", fullCertificateList);
 
@@ -52,7 +53,7 @@ public class GiftCertificatesController {
 
     @PostMapping()
     @ResponseBody
-    public void createNewCertificate(@RequestBody @Valid GiftCertificateDataTransferObject certificateDto) {
+    public void createNewCertificate(@RequestBody @Valid GiftCertificateDTO certificateDto) {
         certificateTagService.createNewCertificateWithTags(certificateDto);
     }
 

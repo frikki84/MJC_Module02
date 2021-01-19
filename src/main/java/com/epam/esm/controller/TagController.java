@@ -20,25 +20,28 @@ public class TagController {
 
     @GetMapping()
     public List<Tag> findAllCertificates() {
+        System.out.println("Tag Controller get");
         List<Tag> fullTagList = tagService.findAllTagList();
         return fullTagList;
     }
 
-    @GetMapping("/{id}")
-    public Tag findTagById(@PathVariable("id") int id) {
-        Tag tag = tagService.findTagById(id);
-        return tag;
-    }
+//    @GetMapping("/{id}")
+//    public Tag findTag(@PathVariable("id") int id) {
+//        Tag tag = tagService.findTag(id);
+//        return tag;
+//    }
 
     @GetMapping("/{name}")
-    public Tag findTagByName(@PathVariable("name") String name) {
-        Tag tag = tagService.findTagByName(name);
+    public Tag findTag(@PathVariable("name") String name) {
+        Tag tag = tagService.findTag(name);
         return tag;
     }
 
     @PostMapping()
     @ResponseBody
     public void createNewTag(@RequestBody @Valid Tag tag) {
+        System.out.println("Controller tag post");
+
         tagService.addNewTag(tag);
     }
 

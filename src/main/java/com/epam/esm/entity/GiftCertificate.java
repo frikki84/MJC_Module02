@@ -24,7 +24,7 @@ public class GiftCertificate {
     private BigDecimal price;
 
     @DecimalMin(value = "1", message = "Enter certificate duration more than 1 day")
-    private int daysDuration;
+    private int duration;
 
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
     private LocalDateTime createDate;
@@ -35,11 +35,11 @@ public class GiftCertificate {
     public GiftCertificate() {
     }
 
-    public GiftCertificate(String name, String description, BigDecimal price, int daysDuration, LocalDateTime createDate, LocalDateTime lastUpdateDate) {
+    public GiftCertificate(String name, String description, BigDecimal price, int duration, LocalDateTime createDate, LocalDateTime lastUpdateDate) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.daysDuration = daysDuration;
+        this.duration = duration;
         this.createDate = createDate;
         this.lastUpdateDate = lastUpdateDate;
     }
@@ -49,7 +49,7 @@ public class GiftCertificate {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.daysDuration = daysDuration;
+        this.duration = daysDuration;
         this.createDate = createDate;
         this.lastUpdateDate = lastUpdateDate;
     }
@@ -58,7 +58,7 @@ public class GiftCertificate {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.daysDuration = daysDuration;
+        this.duration = daysDuration;
     }
 
     public int getId() {
@@ -85,12 +85,12 @@ public class GiftCertificate {
         this.price = price;
     }
 
-    public int getDaysDuration() {
-        return daysDuration;
+    public int getDuration() {
+        return duration;
     }
 
-    public void setDaysDuration(int daysDuration) {
-        this.daysDuration = daysDuration;
+    public void setDuration(int daysDuration) {
+        this.duration = daysDuration;
     }
 
     public LocalDateTime getCreateDate() {
@@ -122,12 +122,12 @@ public class GiftCertificate {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GiftCertificate that = (GiftCertificate) o;
-        return id == that.id && daysDuration == that.daysDuration && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(price, that.price) && Objects.equals(createDate, that.createDate) && Objects.equals(lastUpdateDate, that.lastUpdateDate);
+        return id == that.id && duration == that.duration && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(price, that.price) && Objects.equals(createDate, that.createDate) && Objects.equals(lastUpdateDate, that.lastUpdateDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, price, daysDuration, createDate, lastUpdateDate);
+        return Objects.hash(id, name, description, price, duration, createDate, lastUpdateDate);
     }
 
     @Override
@@ -137,7 +137,7 @@ public class GiftCertificate {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
-                ", daysDuration=" + daysDuration +
+                ", daysDuration=" + duration +
                 ", createDate=" + createDate +
                 ", lastUpdateDate=" + lastUpdateDate +
                 '}';

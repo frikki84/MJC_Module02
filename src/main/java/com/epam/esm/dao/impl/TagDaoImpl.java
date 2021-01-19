@@ -1,14 +1,17 @@
 package com.epam.esm.dao.impl;
 
 import com.epam.esm.dao.TagDao;
-import com.epam.esm.entity.GiftCertificate;
-import com.epam.esm.entity.GiftCertificateDataTransferObject;
 import com.epam.esm.entity.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
+import java.math.BigInteger;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.List;
 
 @Component
@@ -35,7 +38,7 @@ public class TagDaoImpl implements TagDao {
     }
 
     @Override
-    public Tag findTagById(int id) {
+    public Tag findTag(int id) {
         Tag tag = template.query(SQL_QUERY_READ_ONE_TAG_BY_ID
                 , new Object[]{id}, new BeanPropertyRowMapper<>(Tag.class))
                 .stream().findAny().orElse(null);
@@ -43,17 +46,27 @@ public class TagDaoImpl implements TagDao {
     }
 
     @Override
-    public Tag findTagByName(String name) {
-        Tag tag = template.query(SQL_QUERY_READ_ONE_TAG_BY_ID
+    public Tag findTag(String name) {
+        Tag tag = template.query(SQL_QUERY_READ_ONE_TAG_BY_NAME
                 , new Object[]{name}, new BeanPropertyRowMapper<>(Tag.class))
                 .stream().findAny().orElse(null);
         return  tag;
     }
 
     @Override
-    public void addNewTag(Tag tag) {
+    public long addNewTag(Tag tag) {
+        KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
+        template.update(connection -> {
+            PreparedStatement ps = connection
+                    .prepareStatement(SQL_QUERY_INSERT_TAG, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, tag.getName());
+            return ps;
 
-        template.update(SQL_QUERY_INSERT_TAG, tag.getName());
+        }, generatedKeyHolder);
+
+        long key = ((BigInteger)generatedKeyHolder.getKey()).longValue();
+
+        return key;
     }
 
     @Override

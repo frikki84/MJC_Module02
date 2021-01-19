@@ -17,7 +17,7 @@ public class CertificateTagDaoImpl implements CertificateTagDao {
     }
 
     @Override
-    public void createNewCertificateTagRelation(int certificateId, int tagId) {
+    public void createNewCertificateTagRelation(long certificateId, long tagId) {
         template.update(SQL_QUERY_INSERT_CERTIFICATE_TAG_RELATION, certificateId, tagId);
 
     }

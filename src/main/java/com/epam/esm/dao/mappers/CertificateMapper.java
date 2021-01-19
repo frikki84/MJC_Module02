@@ -16,9 +16,9 @@ public class CertificateMapper implements RowMapper<GiftCertificate> {
 
         certificate.setId(rs.getInt("id_gift_certicicate"));
         certificate.setName(rs.getString("name"));
-        certificate.setPrice(rs.getBigDecimal("price"));
         certificate.setDescription(rs.getString("description"));
-        certificate.setDaysDuration(rs.getInt("duration"));
+        certificate.setPrice(rs.getBigDecimal("price"));
+        certificate.setDuration(rs.getInt("duration"));
         certificate.setCreateDate(rs.getTimestamp("create_date").toLocalDateTime());
         certificate.setCreateDate(rs.getTimestamp("last_update_date").toLocalDateTime());
 

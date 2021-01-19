@@ -22,14 +22,14 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public Tag findTagById(int id) {
-        Tag tag = tagDao.findTagById(id);
+    public Tag findTag(int id) {
+        Tag tag = tagDao.findTag(id);
         return tag;
     }
 
     @Override
-    public Tag findTagByName(String name) {
-        Tag tag = tagDao.findTagByName(name);
+    public Tag findTag(String name) {
+        Tag tag = tagDao.findTag(name);
         return  tag;
     }
 
@@ -39,9 +39,10 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public void addNewTag(Tag tag) {
+    public long addNewTag(Tag tag) {
 
-        tagDao.addNewTag(tag);
+        long tagId = tagDao.addNewTag(tag);
+        return tagId;
     }
 
 

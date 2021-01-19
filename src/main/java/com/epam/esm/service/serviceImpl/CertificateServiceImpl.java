@@ -2,8 +2,6 @@ package com.epam.esm.service.serviceImpl;
 
 import com.epam.esm.dao.CertificateDao;
 import com.epam.esm.entity.GiftCertificate;
-import com.epam.esm.entity.GiftCertificateDataTransferObject;
-import com.epam.esm.entity.Tag;
 import com.epam.esm.service.CertificateService;
 import com.epam.esm.service.entitydtomapper.CertificateDtoMapper;
 import com.epam.esm.service.entitydtomapper.TagDtoMapper;
@@ -35,11 +33,13 @@ public class CertificateServiceImpl implements CertificateService {
         return certificateDao.findCertificateById(id);
     }
 
-    public void createNewCertificate(GiftCertificate certificate) {
+    public long createNewCertificate(GiftCertificate certificate) {
         LocalDateTime currentDate = LocalDateTime.now();
         certificate.setCreateDate(currentDate);
         certificate.setLastUpdateDate(currentDate);
-        certificateDao.createNewCertificate(certificate);
+        long certificateId =  certificateDao.createNewCertificate(certificate);
+
+        return  certificateId;
     }
 
     public void updateCertificate(GiftCertificate certificate, int id) {

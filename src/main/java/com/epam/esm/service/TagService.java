@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface TagService {
     public List<Tag> findAllTagList();
-    public Tag findTagById(int id);
-    public Tag findTagByName(String name);
-    public void addNewTag(Tag tag);
+    public Tag findTag(int id);
+    public Tag findTag(String name);
+    public long addNewTag(Tag tag);
     public void deleteTag(int id);
 
 }

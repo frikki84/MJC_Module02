@@ -1,17 +1,16 @@
 package com.epam.esm.service.entitydtomapper;
 
 import com.epam.esm.entity.GiftCertificate;
-import com.epam.esm.entity.GiftCertificateDataTransferObject;
+import com.epam.esm.entity.GiftCertificateDTO;
 import com.epam.esm.entity.Tag;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 
 public interface CertificateDtoMapper {
-    public GiftCertificate changeDtoToCertificate(GiftCertificateDataTransferObject dto);
+    public GiftCertificate changeDtoToCertificate(GiftCertificateDTO dto);
 
-    public GiftCertificateDataTransferObject changeCertificateToDto(GiftCertificate certificate, List<Tag> tagList);
+    public GiftCertificateDTO changeCertificateToDto(GiftCertificate certificate, List<Tag> tagList);
 
 
 

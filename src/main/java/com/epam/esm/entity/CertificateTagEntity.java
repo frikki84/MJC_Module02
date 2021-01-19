@@ -3,30 +3,30 @@ package com.epam.esm.entity;
 import java.util.Objects;
 
 public class CertificateTagEntity {
-    private int certificateId;
-    private int tagId;
+    private long certificateId;
+    private long tagId;
 
     public CertificateTagEntity() {
     }
 
-    public CertificateTagEntity(int certificateId, int tagId) {
+    public CertificateTagEntity(long certificateId, long tagId) {
         this.certificateId = certificateId;
         this.tagId = tagId;
     }
 
-    public int getCertificateId() {
+    public long getCertificateId() {
         return certificateId;
     }
 
-    public void setCertificateId(int certificateId) {
+    public void setCertificateId(long certificateId) {
         this.certificateId = certificateId;
     }
 
-    public int getTagId() {
+    public long getTagId() {
         return tagId;
     }
 
-    public void setTagId(int tagId) {
+    public void setTagId(long tagId) {
         this.tagId = tagId;
     }
 
