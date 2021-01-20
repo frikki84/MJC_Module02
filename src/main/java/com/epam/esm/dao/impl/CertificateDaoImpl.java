@@ -30,17 +30,9 @@ public class CertificateDaoImpl implements CertificateDao {
     public static final String SQL_QUERY_UPDATE_CERTIFICATE = "update gift_certicicate set name=?, description=?" +
             ", price=?, duration=?, create_date=?, last_update_date=? where id = ?;";
     public static final String SQL_QUERY_DELETE_CERTIFICATE = "delete from gift_certicicate where id = ?;";
-    public static final String SQL_QUERY_FIND_CERTIFICATE_ID = "select id from gift_certicicate where create_date = ? and name like ?";
 
 
     private final JdbcTemplate template;
-
-
-//
-//    @Autowired
-//    public CertificateDaoImpl(NamedParameterJdbcTemplate template) {
-//        this.template = template;
-//    }
 
     @Autowired
     public CertificateDaoImpl(JdbcTemplate template) {
@@ -55,7 +47,7 @@ public class CertificateDaoImpl implements CertificateDao {
     }
 
 
-    public GiftCertificate findCertificateById(int id) {
+    public GiftCertificate findCertificateById(long id) {
         GiftCertificate certificate = template.query(SQL_QUERY_READ_ONE_CERTIFICATE
                 , new Object[]{id}, new BeanPropertyRowMapper<>(GiftCertificate.class))
                 .stream().findAny().orElse(null);
@@ -64,12 +56,10 @@ public class CertificateDaoImpl implements CertificateDao {
     }
 
     public long createNewCertificate(GiftCertificate certificate) {
-       KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
+        KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
         template.update(connection -> {
             PreparedStatement ps = connection
                     .prepareStatement(SQL_QUERY_INSERT_CERTIFICATE, Statement.RETURN_GENERATED_KEYS);
-
-
             ps.setString(1, certificate.getName());
             ps.setString(2, certificate.getDescription());
             ps.setBigDecimal(3, certificate.getPrice());
@@ -80,30 +70,22 @@ public class CertificateDaoImpl implements CertificateDao {
 
         }, generatedKeyHolder);
 
-        long key = ((BigInteger)generatedKeyHolder.getKey()).longValue();
+        long key = ((BigInteger) generatedKeyHolder.getKey()).longValue();
 
         return key;
     }
 
-    public void updateCertificate(GiftCertificate updatedCertificate, int id) {
-//        template.update(SQL_QUERY_UPDATE_CERTIFICATE, updatedCertificate.getName(), updatedCertificate.getDescription()
-//                , updatedCertificate.getPrice(), updatedCertificate.getDaysDuration(), updatedCertificate.getCreateDate()
-//                , updatedCertificate.getLastUpdateDate(), id);
+    public void updateCertificate(GiftCertificate updatedCertificate, long id) {
+
+        template.update(SQL_QUERY_UPDATE_CERTIFICATE, updatedCertificate.getName(), updatedCertificate.getDescription()
+                , updatedCertificate.getPrice(), updatedCertificate.getDuration(), updatedCertificate.getCreateDate()
+                , updatedCertificate.getLastUpdateDate(), id);
 
     }
 
-    public void deleteCertificate(int id) {
-//        template.update(SQL_QUERY_DELETE_CERTIFICATE, id);
+    public void deleteCertificate(long id) {
+        template.update(SQL_QUERY_DELETE_CERTIFICATE, id);
 
-    }
-
-    @Override
-    public int findcertificateIdByCertificateInformation(GiftCertificate certificate) {
-//        int id = template.query(SQL_QUERY_FIND_CERTIFICATE_ID
-//                , new Object[]{certificate.getCreateDate(), certificate.getName()}, new BeanPropertyRowMapper<>(GiftCertificate.class))
-//                .stream().findAny().orElse(null).getId();
-//
-        return 0;
     }
 
 

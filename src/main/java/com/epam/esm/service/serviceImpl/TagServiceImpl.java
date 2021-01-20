@@ -22,7 +22,7 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public Tag findTag(int id) {
+    public Tag findTag(long id) {
         Tag tag = tagDao.findTag(id);
         return tag;
     }
@@ -34,7 +34,7 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public void deleteTag(int id) {
+    public void deleteTag(long id) {
         tagDao.deleteTag(id);
     }
 

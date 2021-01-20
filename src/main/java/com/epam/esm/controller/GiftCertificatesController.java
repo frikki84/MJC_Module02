@@ -32,7 +32,7 @@ public class GiftCertificatesController {
 
     @GetMapping()
     public List<GiftCertificate> findAllCertificates() {
-        System.out.println("certificate controller get");
+
         List<GiftCertificate> fullCertificateList = certificateService.findAllCertificates();
         //model.addAttribute("certificateList", fullCertificateList);
 
@@ -40,7 +40,7 @@ public class GiftCertificatesController {
     }
 
     @GetMapping("/{id}")
-    public GiftCertificate findCertificateById(@PathVariable("id") int id) {
+    public GiftCertificate findCertificateById(@PathVariable("id") long id) {
         GiftCertificate certificate = certificateService.findCertificateById(id);
        //model.addAttribute("certificate", certificate);
         return certificate;
@@ -66,10 +66,10 @@ public class GiftCertificatesController {
 
     @PatchMapping("/{id}")
     @ResponseBody
-    public void updateCertificate(@RequestBody @Valid GiftCertificate certificate, BindingResult bindingResult, @PathVariable("id") int id) {
+    public void updateCertificate(@RequestBody @Valid GiftCertificate certificate, @PathVariable("id") long id) {
 //        if (bindingResult.hasErrors()) {
-//            return PATH_TO_ERROR_PAGE;
-//        }
+//            return PATH_TO_ERROR_PAGE;        }
+
         certificateService.updateCertificate(certificate, id);
        // return PATH_TO_MAIN_PAGE;
     }

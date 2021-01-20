@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface CertificateDao {
     public List<GiftCertificate> findAllCertificates();
-    public GiftCertificate findCertificateById(int id);
+    public GiftCertificate findCertificateById(long id);
     public long createNewCertificate(GiftCertificate certificate);
-    public void updateCertificate(GiftCertificate certificate, int id);
-    public void deleteCertificate(int id);
-    public  int findcertificateIdByCertificateInformation(GiftCertificate certificate);
+    public void updateCertificate(GiftCertificate certificate, long id);
+    public void deleteCertificate(long id);
+
 }

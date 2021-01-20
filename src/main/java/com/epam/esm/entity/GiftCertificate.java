@@ -10,13 +10,13 @@ import java.util.Objects;
 
 @ResponseBody
 public class GiftCertificate {
-    private int id;
+    private long id;
 
-   @NotBlank(message = "The field can't be empty")
+   //@NotBlank(message = "The field can't be empty")
    @Size(min = 3, max = 20, message = "The certificate name could be between 3 and 20 symbols")
     private String name;
 
-   @NotEmpty(message = "Please, write the certificate description")
+   //@NotEmpty(message = "Please, write the certificate description")
    @Size(min = 5, max = 100, message = "Description could be between 5 and 100 symbols")
     private String description;
 
@@ -44,7 +44,7 @@ public class GiftCertificate {
         this.lastUpdateDate = lastUpdateDate;
     }
 
-    public GiftCertificate(int id, String name, String description, BigDecimal price, int daysDuration, LocalDateTime createDate, LocalDateTime lastUpdateDate) {
+    public GiftCertificate(long id, String name, String description, BigDecimal price, int daysDuration, LocalDateTime createDate, LocalDateTime lastUpdateDate) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -61,11 +61,11 @@ public class GiftCertificate {
         this.duration = daysDuration;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

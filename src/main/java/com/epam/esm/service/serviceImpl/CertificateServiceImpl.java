@@ -29,7 +29,7 @@ public class CertificateServiceImpl implements CertificateService {
         return certificateDao.findAllCertificates();
     }
 
-    public GiftCertificate findCertificateById(int id) {
+    public GiftCertificate findCertificateById(long id) {
         return certificateDao.findCertificateById(id);
     }
 
@@ -38,24 +38,42 @@ public class CertificateServiceImpl implements CertificateService {
         certificate.setCreateDate(currentDate);
         certificate.setLastUpdateDate(currentDate);
         long certificateId =  certificateDao.createNewCertificate(certificate);
-
         return  certificateId;
     }
 
-    public void updateCertificate(GiftCertificate certificate, int id) {
-        LocalDateTime currentDate = LocalDateTime.now();
-        certificate.setLastUpdateDate(currentDate);
-        certificateDao.updateCertificate(certificate, id);
-    }
+    @Override
+    public void updateCertificate(GiftCertificate certificate, long id) {
+        GiftCertificate certificateFromDb = certificateDao.findCertificateById(id);
 
-    public void deleteCertificate(int id) {
-        certificateDao.deleteCertificate(id);
+        if (certificate.getName() != null ) {
+            certificateFromDb.setName(certificate.getName());
+        }
+        if (certificate.getDescription() != null) {
+            certificateFromDb.setDescription(certificate.getDescription());
+        }
+        if (certificate.getPrice() != null) {
+            certificateFromDb.setPrice(certificate.getPrice());
+        }
+        if (certificate.getDuration() != 0) {
+            certificateFromDb.setDuration(certificate.getDuration());
+        }
+        if (certificate.getCreateDate() != null) {
+            certificateFromDb.setCreateDate(certificate.getCreateDate());
+        }
+
+        LocalDateTime currentDate = LocalDateTime.now();
+        certificateFromDb.setLastUpdateDate(currentDate);
+
+        certificateDao.updateCertificate(certificateFromDb, id);
     }
 
     @Override
-    public int findcertificateIdByCertificateInformation(GiftCertificate certificate) {
-        return 0;
+    public void deleteCertificate(long id) {
+        certificateDao.deleteCertificate(id);
     }
+
+
+
 
 
 }

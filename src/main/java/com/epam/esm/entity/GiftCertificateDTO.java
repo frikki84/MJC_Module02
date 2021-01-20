@@ -16,7 +16,7 @@ import java.util.Objects;
 
 @ResponseBody
 public class GiftCertificateDTO {
-    private int id;
+    private long id;
 
     @NotBlank(message = "The field can't be empty")
     @Size(min = 3, max = 20, message = "The certificate name could be between 3 and 20 symbols")
@@ -52,11 +52,11 @@ public class GiftCertificateDTO {
         this.tagList = tagList;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

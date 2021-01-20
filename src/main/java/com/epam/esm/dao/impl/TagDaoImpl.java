@@ -38,7 +38,7 @@ public class TagDaoImpl implements TagDao {
     }
 
     @Override
-    public Tag findTag(int id) {
+    public Tag findTag(long id) {
         Tag tag = template.query(SQL_QUERY_READ_ONE_TAG_BY_ID
                 , new Object[]{id}, new BeanPropertyRowMapper<>(Tag.class))
                 .stream().findAny().orElse(null);
@@ -70,7 +70,7 @@ public class TagDaoImpl implements TagDao {
     }
 
     @Override
-    public void deleteTag(int id) {
+    public void deleteTag(long id) {
         template.update(SQL_QUERY_DELETE_TAG, id);
 
     }

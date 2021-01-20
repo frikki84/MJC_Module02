@@ -55,5 +55,10 @@ public class CertificateTagServiceImpl implements CertificateTagService {
         }
     }
 
+    @Override
+    public void deleteCertificateWithTags(int id) {
+
+    }
+
 
 }
