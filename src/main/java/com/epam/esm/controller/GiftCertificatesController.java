@@ -32,24 +32,15 @@ public class GiftCertificatesController {
 
     @GetMapping()
     public List<GiftCertificate> findAllCertificates() {
-
         List<GiftCertificate> fullCertificateList = certificateService.findAllCertificates();
-        //model.addAttribute("certificateList", fullCertificateList);
-
         return fullCertificateList;
     }
 
     @GetMapping("/{id}")
     public GiftCertificate findCertificateById(@PathVariable("id") long id) {
         GiftCertificate certificate = certificateService.findCertificateById(id);
-       //model.addAttribute("certificate", certificate);
         return certificate;
     }
-
-//    @GetMapping("/new")
-//    public String  addNewCertificate(@ModelAttribute("certificate") GiftCertificate certificate) {
-//        return PATH_TO_ADDING_NEW_CERTIFICATE;
-//    }
 
     @PostMapping()
     @ResponseBody
@@ -57,26 +48,51 @@ public class GiftCertificatesController {
         certificateTagService.createNewCertificateWithTags(certificateDto);
     }
 
-//    @GetMapping("/{id}/edit")
-//    public String editCertificate(Model model, @PathVariable("id") int id) {
-//        GiftCertificate certificate = certificateService.findCertificateById(id);
-//        model.addAttribute("certificate", certificate);
-//        return PATH_TO_EDIT_CERTIFICATE;
-//    }
-
     @PatchMapping("/{id}")
     @ResponseBody
     public void updateCertificate(@RequestBody @Valid GiftCertificate certificate, @PathVariable("id") long id) {
-//        if (bindingResult.hasErrors()) {
-//            return PATH_TO_ERROR_PAGE;        }
-
         certificateService.updateCertificate(certificate, id);
-       // return PATH_TO_MAIN_PAGE;
     }
 
     @DeleteMapping("/{id}")
     public void deleteCertificate(@PathVariable("id") int id) {
         certificateService.deleteCertificate(id);
+    }
+
+    @GetMapping("/info")
+    public List<GiftCertificateDTO> findCertificatesWithTags() {
+        List<GiftCertificateDTO> certificateList = certificateService.findCertificatesWithTags();
+        return certificateList;
+    }
+
+    @GetMapping("/info/{tagName}")
+    public List<GiftCertificateDTO> findCertificatesByTag(@PathVariable("tagName") String tagName) {
+        List<GiftCertificateDTO> certificateList = certificateService.findAllCertificatesWithTagsByTagName(tagName);
+        return certificateList;
+    }
+
+    @GetMapping("/info/sort_name_asc")
+    public List<GiftCertificateDTO> sortCertificatesByNameAsc() {
+        List<GiftCertificateDTO> certificateList = certificateService.sortAllCertificatesByNameAsc();
+        return certificateList;
+    }
+
+    @GetMapping("/info/sort_name_decs")
+    public List<GiftCertificateDTO> sortCertificatesByNameDecs() {
+        List<GiftCertificateDTO> certificateList = certificateService.sortAllCertificatesByNameDesc();
+        return certificateList;
+    }
+
+    @GetMapping("/info/sort_name+time")
+    public List<GiftCertificateDTO> sortCertificatesByNameTime() {
+        List<GiftCertificateDTO> certificateList = certificateService.sortAllCertificatesByNameTime();
+        return certificateList;
+    }
+
+    @GetMapping("/info/find/{namePart}")
+    public List<GiftCertificateDTO> findAllCertificatesWithTagsByNameOrDescriptionPart(@PathVariable("namePart") String namePart) {
+        List<GiftCertificateDTO> certificateList = certificateService.findAllCertificatesWithTagsByNameOrDescriptionPart(namePart);
+        return certificateList;
     }
 
 

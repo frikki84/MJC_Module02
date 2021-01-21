@@ -1,5 +1,6 @@
 package com.epam.esm.service.entitydtomapper;
 
+import com.epam.esm.entity.CertificateWithTagFromDb;
 import com.epam.esm.entity.GiftCertificate;
 import com.epam.esm.entity.GiftCertificateDTO;
 import com.epam.esm.entity.Tag;
@@ -11,6 +12,7 @@ public interface CertificateDtoMapper {
     public GiftCertificate changeDtoToCertificate(GiftCertificateDTO dto);
 
     public GiftCertificateDTO changeCertificateToDto(GiftCertificate certificate, List<Tag> tagList);
+    public List<GiftCertificateDTO> createDTOList(List<CertificateWithTagFromDb> list);
 
 
 

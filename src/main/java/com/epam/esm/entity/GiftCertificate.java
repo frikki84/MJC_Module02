@@ -13,11 +13,11 @@ public class GiftCertificate {
     private long id;
 
    //@NotBlank(message = "The field can't be empty")
-   @Size(min = 3, max = 20, message = "The certificate name could be between 3 and 20 symbols")
+   @Size(min = 3, max = 32, message = "The certificate name could be between 3 and 20 symbols")
     private String name;
 
    //@NotEmpty(message = "Please, write the certificate description")
-   @Size(min = 5, max = 100, message = "Description could be between 5 and 100 symbols")
+   @Size(min = 5, max = 128, message = "Description could be between 5 and 100 symbols")
     private String description;
 
     @DecimalMin(value = "0", message = "Enter certificate price")

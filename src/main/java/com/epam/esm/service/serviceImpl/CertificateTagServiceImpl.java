@@ -41,10 +41,11 @@ public class CertificateTagServiceImpl implements CertificateTagService {
 
         List<Tag> tagList = tagDtoMapper.changeCertificateDtoToTagList(dto);
 
-        for(Tag tag : tagList) {
+        for (Tag tag : tagList) {
             long tagId = 0;
 
-            if (tagService.findTag(tag.getName())== null) {
+
+            if (tagService.findTag(tag.getName()) == null) {
                 tagId = tagService.addNewTag(tag);
 
             } else {
@@ -55,10 +56,6 @@ public class CertificateTagServiceImpl implements CertificateTagService {
         }
     }
 
-    @Override
-    public void deleteCertificateWithTags(int id) {
-
-    }
 
 
 }

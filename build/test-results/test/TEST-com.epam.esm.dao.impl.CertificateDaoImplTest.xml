@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.epam.esm.dao.impl.CertificateDaoImplTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-01-18T19:34:57" hostname="DESKTOP-N99POAQ" time="0.015">
+<testsuite name="com.epam.esm.dao.impl.CertificateDaoImplTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-01-21T08:53:05" hostname="DESKTOP-N99POAQ" time="0.011">
   <properties/>
-  <testcase name="findAllCertificates()" classname="com.epam.esm.dao.impl.CertificateDaoImplTest" time="0.015"/>
+  <testcase name="findAllCertificates()" classname="com.epam.esm.dao.impl.CertificateDaoImplTest" time="0.011"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

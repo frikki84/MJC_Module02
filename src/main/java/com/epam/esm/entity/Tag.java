@@ -12,10 +12,15 @@ public class Tag {
     private long id;
 
     @NotBlank(message = "The field can't be empty")
-    @Size(min = 3, max = 20, message = "The certificate name could be between 3 and 20 symbols")
+    @Size(min = 3, max = 32, message = "The certificate name could be between 3 and 20 symbols")
     private String name;
 
     public Tag() {
+    }
+
+    public Tag(long id, @NotBlank(message = "The field can't be empty") @Size(min = 3, max = 32, message = "The certificate name could be between 3 and 20 symbols") String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Tag(String name) {
