@@ -13,18 +13,18 @@ public class Tag {
 
     @NotBlank(message = "The field can't be empty")
     @Size(min = 3, max = 32, message = "The certificate name could be between 3 and 20 symbols")
-    private String name;
+    private String nameTag;
 
     public Tag() {
     }
 
-    public Tag(long id, @NotBlank(message = "The field can't be empty") @Size(min = 3, max = 32, message = "The certificate name could be between 3 and 20 symbols") String name) {
+    public Tag(long id, @NotBlank(message = "The field can't be empty") @Size(min = 3, max = 32, message = "The certificate name could be between 3 and 20 symbols") String nameTag) {
         this.id = id;
-        this.name = name;
+        this.nameTag = nameTag;
     }
 
     public Tag(String name) {
-        this.name = name;
+        this.nameTag = name;
     }
 
     public long getId() {
@@ -35,12 +35,12 @@ public class Tag {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNameTag() {
+        return nameTag;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameTag(String nameTag) {
+        this.nameTag = nameTag;
     }
 
     @Override
@@ -48,19 +48,19 @@ public class Tag {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Tag tag = (Tag) o;
-        return id == tag.id && Objects.equals(name, tag.name);
+        return id == tag.id && Objects.equals(nameTag, tag.nameTag);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, nameTag);
     }
 
     @Override
     public String toString() {
         return "Tag{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + nameTag + '\'' +
                 '}';
     }
 }

@@ -39,10 +39,9 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public long addNewTag(Tag tag) {
-
-        long tagId = tagDao.addNewTag(tag);
-        return tagId;
+    public Tag addNewTag(Tag tag) {
+        Tag newTag = tagDao.addNewTag(tag);
+        return newTag;
     }
 
 

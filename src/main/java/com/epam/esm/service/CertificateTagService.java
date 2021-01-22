@@ -8,7 +8,7 @@ import java.util.List;
 
 @Component
 public interface CertificateTagService {
-    public void createNewCertificateWithTags(GiftCertificateDTO dto);
+    public long createNewCertificateWithTags(GiftCertificateDTO dto);
 
 
 

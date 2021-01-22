@@ -18,8 +18,8 @@ import java.util.List;
 public class TagDaoImpl implements TagDao {
     public static final String SQL_QUERY_READ_TAG_LIST = "Select * from tag;";
     public static final String SQL_QUERY_READ_ONE_TAG_BY_ID = "select * from tag where id = ?;";
-    public static final String SQL_QUERY_READ_ONE_TAG_BY_NAME = "select * from tag where name like ?;";
-    public static final String SQL_QUERY_INSERT_TAG = "insert into tag (name) values (?);";
+    public static final String SQL_QUERY_READ_ONE_TAG_BY_NAME = "select * from tag where nameTag like ?;";
+    public static final String SQL_QUERY_INSERT_TAG = "insert into tag (nameTag) values (?);";
     public static final String SQL_QUERY_DELETE_TAG = "delete from tag where id = ?;";
 
 
@@ -54,19 +54,20 @@ public class TagDaoImpl implements TagDao {
     }
 
     @Override
-    public long addNewTag(Tag tag) {
+    public Tag addNewTag(Tag tag) {
         KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
         template.update(connection -> {
             PreparedStatement ps = connection
                     .prepareStatement(SQL_QUERY_INSERT_TAG, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, tag.getName());
+            ps.setString(1, tag.getNameTag());
             return ps;
 
         }, generatedKeyHolder);
 
         long key = ((BigInteger)generatedKeyHolder.getKey()).longValue();
+        tag.setId(key);
 
-        return key;
+        return tag;
     }
 
     @Override

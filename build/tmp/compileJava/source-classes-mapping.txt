@@ -22,6 +22,10 @@ com/epam/esm/entity/CertificateTagEntity.java
  com.epam.esm.entity.CertificateTagEntity
 com/epam/esm/dao/mappers/TagMapper.java
  com.epam.esm.dao.mappers.TagMapper
+com/epam/esm/exception/ApplicationExceptionHandler.java
+ com.epam.esm.exception.ApplicationExceptionHandler
+com/epam/esm/exception/InvalidDataException.java
+ com.epam.esm.exception.InvalidDataException
 com/epam/esm/service/TagService.java
  com.epam.esm.service.TagService
 com/epam/esm/service/serviceImpl/CertificateServiceImpl.java
@@ -32,6 +36,8 @@ com/epam/esm/service/entitydtomapper/impl/CertificateDtoMapperImpl.java
  com.epam.esm.service.entitydtomapper.impl.CertificateDtoMapperImpl
 com/epam/esm/config/SpringConfig.java
  com.epam.esm.config.SpringConfig
+com/epam/esm/exception/ExceptionDetails.java
+ com.epam.esm.exception.ExceptionDetails
 com/epam/esm/service/serviceImpl/CertificateTagServiceImpl.java
  com.epam.esm.service.serviceImpl.CertificateTagServiceImpl
 com/epam/esm/dao/CertificateTagDao.java
@@ -48,12 +54,12 @@ com/epam/esm/service/CertificateService.java
  com.epam.esm.service.CertificateService
 com/epam/esm/entity/CertificateWithTagFromDb.java
  com.epam.esm.entity.CertificateWithTagFromDb
-com/epam/esm/exception/DaoException.java
- com.epam.esm.exception.DaoException
 com/epam/esm/service/entitydtomapper/impl/TagDtoMapperImpl.java
  com.epam.esm.service.entitydtomapper.impl.TagDtoMapperImpl
-com/epam/esm/controller/TestingMain.java
- com.epam.esm.controller.TestingMain
+com/epam/esm/exception/TagAlreadyExistsException.java
+ com.epam.esm.exception.TagAlreadyExistsException
 com/epam/esm/dao/impl/CertificateTagDaoImpl.java
  com.epam.esm.dao.impl.CertificateTagDaoImpl
  com.epam.esm.dao.impl.CertificateTagDaoImpl$1
+com/epam/esm/exception/NoSuchResourceException.java
+ com.epam.esm.exception.NoSuchResourceException

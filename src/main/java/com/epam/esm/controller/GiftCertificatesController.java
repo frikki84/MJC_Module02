@@ -2,25 +2,18 @@ package com.epam.esm.controller;
 
 import com.epam.esm.entity.GiftCertificate;
 import com.epam.esm.entity.GiftCertificateDTO;
+import com.epam.esm.exception.InvalidDataException;
+import com.epam.esm.exception.NoSuchResourceException;
 import com.epam.esm.service.CertificateService;
 import com.epam.esm.service.CertificateTagService;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-//@Controller
 @RequestMapping("/certificates")
 public class GiftCertificatesController {
-//    public static final String PATH_TO_CERTIFICATE_LIST_PAGE = "certificates/index";
-//    public static final String PATH_TO_ONE_CERTIFICATE = "certificates/show";
-//    public static final String PATH_TO_ADDING_NEW_CERTIFICATE = "certificates/new";
-//    public static final String PATH_TO_MAIN_PAGE = "redirect:/certificates";
-//    public static final String PATH_TO_EDIT_CERTIFICATE = "certificates/edit";
-//    public static final String PATH_TO_ERROR_PAGE = "certificates/error";
-
     private final CertificateService certificateService;
     private final CertificateTagService certificateTagService;
 
@@ -39,13 +32,22 @@ public class GiftCertificatesController {
     @GetMapping("/{id}")
     public GiftCertificate findCertificateById(@PathVariable("id") long id) {
         GiftCertificate certificate = certificateService.findCertificateById(id);
+        if (certificate == null) {
+            throw  new NoSuchResourceException("There is no cerfificate with id " + id);
+        }
         return certificate;
     }
 
     @PostMapping()
     @ResponseBody
-    public void createNewCertificate(@RequestBody @Valid GiftCertificateDTO certificateDto) {
-        certificateTagService.createNewCertificateWithTags(certificateDto);
+    public long createNewCertificate(@RequestBody @Valid GiftCertificateDTO certificateDto) {
+       Long id =  certificateTagService.createNewCertificateWithTags(certificateDto);
+        System.out.println("id "  + id);
+       if (id == null || id == 0) {
+           throw  new InvalidDataException("Gift certificate has invalid data");
+       }
+
+       return  id;
     }
 
     @PatchMapping("/{id}")

@@ -10,7 +10,7 @@ public interface TagService {
     public List<Tag> findAllTagList();
     public Tag findTag(long id);
     public Tag findTag(String name);
-    public long addNewTag(Tag tag);
+    public Tag addNewTag(Tag tag);
     public void deleteTag(long id);
 
 }

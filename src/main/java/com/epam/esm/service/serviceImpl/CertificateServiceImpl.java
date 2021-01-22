@@ -94,7 +94,7 @@ public class CertificateServiceImpl implements CertificateService {
 
         List<GiftCertificateDTO> resultList = list.stream()
                 .filter(giftCertificateDTO -> giftCertificateDTO.getTagList()
-                        .stream().anyMatch(tag -> tagName.equalsIgnoreCase(tag.getName()))
+                        .stream().anyMatch(tag -> tagName.equalsIgnoreCase(tag.getNameTag()))
                 ).collect(Collectors.toList());
 
         return resultList;

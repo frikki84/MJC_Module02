@@ -1,6 +1,7 @@
 package com.epam.esm.dao.impl;
 
 import com.epam.esm.dao.CertificateTagDao;
+import com.epam.esm.entity.CertificateTagEntity;
 import com.epam.esm.entity.CertificateWithTagFromDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.CallableStatementCreator;
@@ -31,8 +32,9 @@ public class CertificateTagDaoImpl implements CertificateTagDao {
     }
 
     @Override
-    public void createNewCertificateTagRelation(long certificateId, long tagId) {
-        template.update(SQL_QUERY_INSERT_CERTIFICATE_TAG_RELATION, certificateId, tagId);
+    public long createNewCertificateTagRelation(long certificateId, long tagId) {
+        long updatedField = template.update(SQL_QUERY_INSERT_CERTIFICATE_TAG_RELATION, certificateId, tagId);
+        return  updatedField;
 
     }
     @Override

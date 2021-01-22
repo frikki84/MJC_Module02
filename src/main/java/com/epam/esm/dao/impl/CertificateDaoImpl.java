@@ -2,6 +2,7 @@ package com.epam.esm.dao.impl;
 
 import com.epam.esm.dao.CertificateDao;
 import com.epam.esm.entity.GiftCertificate;
+import com.epam.esm.exception.InvalidDataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,12 +26,11 @@ import java.util.List;
 public class CertificateDaoImpl implements CertificateDao {
     public static final String SQL_QUERY_READ_CERTIFICATES_LIST = "Select * from gift_certificate;";
     public static final String SQL_QUERY_READ_ONE_CERTIFICATE = "select * from gift_certificate where id = ?";
-    public static final String SQL_QUERY_INSERT_CERTIFICATE = "insert into gift_certificate (name, description, price, duration, create_date, last_update_date) values (?, ?, ?, ?, ?, ?);";
+    public static final String SQL_QUERY_INSERT_CERTIFICATE = "insert into gift_certificate (name, description, price" +
+            ", duration, create_date, last_update_date) values (?, ?, ?, ?, ?, ?);";
     public static final String SQL_QUERY_UPDATE_CERTIFICATE = "update gift_certificate set name=?, description=?" +
             ", price=?, duration=?, create_date=?, last_update_date=? where id = ?;";
     public static final String SQL_QUERY_DELETE_CERTIFICATE = "delete from gift_certificate where id = ?;";
-    public static final String SQL_QUERY_FIND_CERTIFICTES_BY_TAG = "select gc.* from gift_certificate gc join gift_certificate_has_tag gct on gc.id=gct.gift_certicicate_id_gift_certicicate join tag t on t.id=gct.tag_id_tag where t.name like ?";
-
 
     private final JdbcTemplate template;
 
@@ -55,7 +55,7 @@ public class CertificateDaoImpl implements CertificateDao {
         return certificate;
     }
 
-    public long createNewCertificate(GiftCertificate certificate) {
+    public long createNewCertificate(GiftCertificate certificate)  {
         KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
         template.update(connection -> {
             PreparedStatement ps = connection
