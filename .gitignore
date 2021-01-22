@@ -8,3 +8,7 @@ gradle
 gradlew
 gradlew.bat
 .gitattributes
+.sts4-cache
+.settings
+.classpath
+.project
