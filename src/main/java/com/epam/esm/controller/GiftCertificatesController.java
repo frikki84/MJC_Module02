@@ -2,10 +2,12 @@ package com.epam.esm.controller;
 
 import com.epam.esm.entity.GiftCertificate;
 import com.epam.esm.entity.GiftCertificateDTO;
+import com.epam.esm.exception.CustomErrorCode;
 import com.epam.esm.exception.InvalidDataException;
 import com.epam.esm.exception.NoSuchResourceException;
 import com.epam.esm.service.CertificateService;
 import com.epam.esm.service.CertificateTagService;
+import com.epam.esm.service.validation.CertificateDTOChecking;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -33,20 +35,19 @@ public class GiftCertificatesController {
     public GiftCertificate findCertificateById(@PathVariable("id") long id) {
         GiftCertificate certificate = certificateService.findCertificateById(id);
         if (certificate == null) {
-            throw  new NoSuchResourceException("There is no cerfificate with id " + id);
+            throw new NoSuchResourceException("There is no cerfificate with id " + id, CustomErrorCode.CERTIFICATE);
         }
         return certificate;
     }
 
     @PostMapping()
     @ResponseBody
-    public long createNewCertificate(@RequestBody @Valid GiftCertificateDTO certificateDto) {
+    public long createNewCertificate(@RequestBody GiftCertificateDTO certificateDto) {
+        String dtoChecking = CertificateDTOChecking.chechCertificateDtoFormat(certificateDto);
+        if (dtoChecking != null) {
+            throw  new InvalidDataException(dtoChecking, CustomErrorCode.CERTIFICATE);
+        }
        Long id =  certificateTagService.createNewCertificateWithTags(certificateDto);
-        System.out.println("id "  + id);
-       if (id == null || id == 0) {
-           throw  new InvalidDataException("Gift certificate has invalid data");
-       }
-
        return  id;
     }
 

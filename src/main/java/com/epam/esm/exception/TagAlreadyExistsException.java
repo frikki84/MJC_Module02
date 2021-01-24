@@ -8,8 +8,13 @@ import java.sql.SQLException;
 
 
 public class TagAlreadyExistsException extends RuntimeException {
-
-    public TagAlreadyExistsException(String message) {
+    private String code;
+    public TagAlreadyExistsException(String message, CustomErrorCode code) {
         super(message);
+        this.code = code.getCode();
+    }
+
+    public String getCode() {
+        return code;
     }
 }

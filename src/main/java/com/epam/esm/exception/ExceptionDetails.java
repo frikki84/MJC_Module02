@@ -9,16 +9,18 @@ import java.time.LocalDateTime;
 public class ExceptionDetails {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
     private LocalDateTime time;
-    private String message;
-    private String details;
+    private int errorStatus;
+    private String errorMessage;
+    private String errorCode;
 
     public ExceptionDetails() {
     }
 
-    public ExceptionDetails(LocalDateTime time, String message, String details) {
+    public ExceptionDetails(LocalDateTime time, int errorStatus, String errorMessage, String errorCode) {
         this.time = time;
-        this.message = message;
-        this.details = details;
+        this.errorStatus = errorStatus;
+        this.errorMessage = errorMessage;
+        this.errorCode = errorCode;
     }
 
     public LocalDateTime getTime() {
@@ -29,20 +31,27 @@ public class ExceptionDetails {
         this.time = time;
     }
 
-    public String getMessage() {
-        return message;
+    public int getErrorStatus() {
+        return errorStatus;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setErrorStatus(int errorStatus) {
+        this.errorStatus = errorStatus;
     }
 
-
-    public String getDetails() {
-        return details;
+    public String getErrorMessage() {
+        return errorMessage;
     }
 
-    public void setDetails(String details) {
-        this.details = details;
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+    public String getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
     }
 }

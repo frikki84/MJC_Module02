@@ -1,6 +1,7 @@
 package com.epam.esm.controller;
 
 import com.epam.esm.entity.Tag;
+import com.epam.esm.exception.CustomErrorCode;
 import com.epam.esm.exception.NoSuchResourceException;
 import com.epam.esm.exception.TagAlreadyExistsException;
 import com.epam.esm.service.TagService;
@@ -23,9 +24,8 @@ public class TagController {
     @GetMapping()
     public List<Tag> findAllCertificates() {
         List<Tag> fullTagList = tagService.findAllTagList();
-
         if (fullTagList == null || fullTagList.isEmpty()) {
-            throw new NoSuchResourceException("There are no tags in DataBase");
+            throw new NoSuchResourceException("There are no tags in DataBase", CustomErrorCode.TAG);
         }
         return fullTagList;
     }
@@ -33,9 +33,8 @@ public class TagController {
     @GetMapping("/{name}")
     public Tag findTag(@PathVariable("name") String name) {
         Tag tag = tagService.findTag(name);
-
         if (tag == null) {
-            throw  new NoSuchResourceException("There is no tag with name " + name);
+            throw  new NoSuchResourceException("There is no tag with name " + name, CustomErrorCode.TAG);
         }
         return tag;
     }
@@ -44,9 +43,8 @@ public class TagController {
     @ResponseBody
     public void createNewTag(@RequestBody @Valid Tag tag) {
          Tag createdTag = tagService.addNewTag(tag);
-
          if (createdTag == null)
-             throw new TagAlreadyExistsException("This tag " + createdTag.getNameTag() + " already exists in DataBase");
+             throw new TagAlreadyExistsException("This tag " + createdTag.getNameTag() + " already exists in DataBase", CustomErrorCode.TAG);
     }
 
     @DeleteMapping("/{id}")

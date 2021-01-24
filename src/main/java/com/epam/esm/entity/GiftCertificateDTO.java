@@ -14,28 +14,14 @@ import java.util.List;
 import java.util.Objects;
 
 
-@ResponseBody
+
 public class GiftCertificateDTO {
     private long id;
-
-    @NotBlank(message = "The field can't be empty")
-    @Size(min = 3, max = 32, message = "The certificate name could be between 3 and 20 symbols")
     private String name;
-
-    @NotEmpty(message = "Please, write the certificate description")
-    @Size(min = 5, max = 128, message = "Description could be between 5 and 100 symbols")
     private String description;
-
-    @DecimalMin(value = "0", message = "Enter certificate price")
     private BigDecimal price;
-
-    @DecimalMin(value = "1", message = "Enter certificate duration more than 1 day")
-    private int duration;
-
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
+    private Integer duration;
     private LocalDateTime createDate;
-
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
     private LocalDateTime lastUpdateDate;
 
     List<Tag> tagList = new ArrayList<>();
@@ -43,30 +29,37 @@ public class GiftCertificateDTO {
     public GiftCertificateDTO() {
     }
 
-    public GiftCertificateDTO(@NotBlank(message = "The field can't be empty") @Size(min = 3, max = 20, message = "The certificate name could be between 3 and 20 symbols") String name, @NotEmpty(message = "Please, write the certificate description") @Size(min = 5, max = 100, message = "Description could be between 5 and 100 symbols") String description, @DecimalMin(value = "0", message = "Enter certificate price") BigDecimal price, @DecimalMin(value = "1", message = "Enter certificate duration more than 1 day") int duration) {
+    public GiftCertificateDTO(String name, String description, BigDecimal price, Integer duration, LocalDateTime createDate, LocalDateTime lastUpdateDate) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.duration = duration;
+        this.createDate = createDate;
+        this.lastUpdateDate = lastUpdateDate;
     }
 
-    public GiftCertificateDTO(@NotBlank(message = "The field can't be empty") @Size(min = 3, max = 20, message = "The certificate name could be between 3 and 20 symbols") String name, @NotEmpty(message = "Please, write the certificate description") @Size(min = 5, max = 100, message = "Description could be between 5 and 100 symbols") String description, @DecimalMin(value = "0", message = "Enter certificate price") BigDecimal price, @DecimalMin(value = "1", message = "Enter certificate duration more than 1 day") int duration, List<Tag> tagList) {
+    public GiftCertificateDTO(String name, String description, BigDecimal price, Integer duration, LocalDateTime createDate, LocalDateTime lastUpdateDate, List<Tag> tagList) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.duration = duration;
+        this.createDate = createDate;
+        this.lastUpdateDate = lastUpdateDate;
         this.tagList = tagList;
     }
 
-    public GiftCertificateDTO(long id, @NotBlank(message = "The field can't be empty") @Size(min = 3, max = 32, message = "The certificate name could be between 3 and 20 symbols") String name, @NotEmpty(message = "Please, write the certificate description") @Size(min = 5, max = 128, message = "Description could be between 5 and 100 symbols") String description, @DecimalMin(value = "0", message = "Enter certificate price") BigDecimal price, @DecimalMin(value = "1", message = "Enter certificate duration more than 1 day") int duration) {
+    public GiftCertificateDTO(long id, String name, String description, BigDecimal price, Integer duration, LocalDateTime createDate, LocalDateTime lastUpdateDate, List<Tag> tagList) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.duration = duration;
+        this.createDate = createDate;
+        this.lastUpdateDate = lastUpdateDate;
+        this.tagList = tagList;
     }
 
-    public GiftCertificateDTO(long id, @NotBlank(message = "The field can't be empty") @Size(min = 3, max = 32, message = "The certificate name could be between 3 and 20 symbols") String name, @NotEmpty(message = "Please, write the certificate description") @Size(min = 5, max = 128, message = "Description could be between 5 and 100 symbols") String description, @DecimalMin(value = "0", message = "Enter certificate price") BigDecimal price, @DecimalMin(value = "1", message = "Enter certificate duration more than 1 day") int duration, LocalDateTime createDate, LocalDateTime lastUpdateDate) {
+    public GiftCertificateDTO(long id, String name, String description, BigDecimal price, Integer duration, LocalDateTime createDate, LocalDateTime lastUpdateDate) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -108,20 +101,12 @@ public class GiftCertificateDTO {
         this.price = price;
     }
 
-    public int getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(Integer duration) {
         this.duration = duration;
-    }
-
-    public List<Tag> getTagList() {
-        return tagList;
-    }
-
-    public void setTagList(List<Tag> tagList) {
-        this.tagList = tagList;
     }
 
     public LocalDateTime getCreateDate() {
@@ -140,30 +125,11 @@ public class GiftCertificateDTO {
         this.lastUpdateDate = lastUpdateDate;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        GiftCertificateDTO that = (GiftCertificateDTO) o;
-        return id == that.id && duration == that.duration && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(price, that.price) && Objects.equals(createDate, that.createDate) && Objects.equals(lastUpdateDate, that.lastUpdateDate) && Objects.equals(tagList, that.tagList);
+    public List<Tag> getTagList() {
+        return tagList;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, description, price, duration, createDate, lastUpdateDate, tagList);
-    }
-
-    @Override
-    public String toString() {
-        return "GiftCertificateDTO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                ", duration=" + duration +
-                ", createDate=" + createDate +
-                ", lastUpdateDate=" + lastUpdateDate +
-                ", tagList=" + tagList +
-                '}';
+    public void setTagList(List<Tag> tagList) {
+        this.tagList = tagList;
     }
 }

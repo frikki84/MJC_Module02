@@ -57,16 +57,15 @@ public class TagDaoImpl implements TagDao {
     public Tag addNewTag(Tag tag) {
         KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
         template.update(connection -> {
-            PreparedStatement ps = connection
+           PreparedStatement ps = connection
                     .prepareStatement(SQL_QUERY_INSERT_TAG, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, tag.getNameTag());
             return ps;
 
         }, generatedKeyHolder);
 
-        long key = ((BigInteger)generatedKeyHolder.getKey()).longValue();
+        long key = ((Long)generatedKeyHolder.getKey()).longValue();
         tag.setId(key);
-
         return tag;
     }
 

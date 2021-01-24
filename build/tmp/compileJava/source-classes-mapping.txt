@@ -16,6 +16,10 @@ com/epam/esm/dao/impl/CertificateDaoImpl.java
  com.epam.esm.dao.impl.CertificateDaoImpl
 com/epam/esm/dao/mappers/CertificateMapper.java
  com.epam.esm.dao.mappers.CertificateMapper
+com/epam/esm/service/validation/CertificateDTOChecking.java
+ com.epam.esm.service.validation.CertificateDTOChecking
+com/epam/esm/exception/CustomErrorCode.java
+ com.epam.esm.exception.CustomErrorCode
 com/epam/esm/dao/impl/TagDaoImpl.java
  com.epam.esm.dao.impl.TagDaoImpl
 com/epam/esm/entity/CertificateTagEntity.java

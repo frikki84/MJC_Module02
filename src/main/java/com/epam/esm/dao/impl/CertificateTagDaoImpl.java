@@ -65,7 +65,6 @@ public class CertificateTagDaoImpl implements CertificateTagDao {
 
         results.forEach(c -> {
             CertificateWithTagFromDb ct = new CertificateWithTagFromDb();
-            System.out.println(ct);
             ct.setCertificateId((int) c.get("id"));
             ct.setCertificateName((String) c.get("name"));
             ct.setDescription((String) c.get("description"));

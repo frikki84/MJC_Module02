@@ -1,7 +1,14 @@
 package com.epam.esm.exception;
 
 public class NoSuchResourceException extends RuntimeException {
-    public NoSuchResourceException(String message) {
+    private String code;
+
+    public NoSuchResourceException(String message, CustomErrorCode code) {
         super(message);
+        this.code = code.getCode();
+    }
+
+    public String getCode() {
+        return code;
     }
 }
