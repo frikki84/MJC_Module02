@@ -13,3 +13,4 @@ gradlew.bat
 .classpath
 .project
 /.run/*
+/build/*
