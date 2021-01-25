@@ -1,13 +1,13 @@
 package com.epam.esm.service.validation;
 
-import com.epam.esm.entity.GiftCertificateDTO;
+import com.epam.esm.entity.dto.GiftCertificateDto;
 
 
 import java.math.BigDecimal;
 
 public class CertificateDTOChecking {
 
-    public static String chechCertificateDtoFormat(GiftCertificateDTO dto) {
+    public static String chechCertificateDtoFormat(GiftCertificateDto dto) {
         String resultString = null;
 
         if (dto.getName() == null || dto.getName().length() < 3 || dto.getName().length() >32) {

@@ -1,8 +1,7 @@
 package com.epam.esm.exception;
 
-import javax.validation.ValidationException;
 
-public class InvalidDataException extends ValidationException {
+public class InvalidDataException extends RuntimeException {
     private String code;
 
     public InvalidDataException(String message, CustomErrorCode code) {

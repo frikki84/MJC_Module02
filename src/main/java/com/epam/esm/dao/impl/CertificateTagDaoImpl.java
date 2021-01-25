@@ -1,8 +1,7 @@
 package com.epam.esm.dao.impl;
 
 import com.epam.esm.dao.CertificateTagDao;
-import com.epam.esm.entity.CertificateTagEntity;
-import com.epam.esm.entity.CertificateWithTagFromDb;
+import com.epam.esm.entity.dto.CertificateWithTagFromDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.CallableStatementCreator;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -72,7 +70,7 @@ public class CertificateTagDaoImpl implements CertificateTagDao {
             ct.setDuration((Integer)c.get("duration"));
             ct.setCreateDate(((Timestamp) c.get("create_date")).toLocalDateTime());
             ct.setLastUpdateDate(((Timestamp)c.get("last_update_date")).toLocalDateTime());
-            //ct.setTagId((Long) c.get(8));
+            //ct.setTagId((long) c.get(8));
             ct.setTagName((String) c.get("nameTag"));
             certificateList.add(ct);
         });

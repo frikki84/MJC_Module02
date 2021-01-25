@@ -3,7 +3,6 @@ package com.epam.esm.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;

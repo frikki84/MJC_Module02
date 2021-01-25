@@ -1,2 +1,2 @@
-com/epam/esm/dao/impl/CertificateDaoImplTest.java
- com.epam.esm.dao.impl.CertificateDaoImplTest
+com/epam/esm/service/serviceImpl/TagServiceImplTest.java
+ com.epam.esm.service.serviceImpl.TagServiceImplTest

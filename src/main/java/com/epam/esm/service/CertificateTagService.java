@@ -1,14 +1,11 @@
 package com.epam.esm.service;
 
-import com.epam.esm.entity.GiftCertificate;
-import com.epam.esm.entity.GiftCertificateDTO;
+import com.epam.esm.entity.dto.GiftCertificateDto;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public interface CertificateTagService {
-    public long createNewCertificateWithTags(GiftCertificateDTO dto);
+    public long createNewCertificateWithTags(GiftCertificateDto dto);
 
 
 

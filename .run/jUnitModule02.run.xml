@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="jUnitModule02" type="JUnit" factoryName="JUnit">
+    <module name="Module02.test" />
+    <option name="PACKAGE_NAME" value="com.epam.esm.service.serviceImpl" />
+    <option name="MAIN_CLASS_NAME" value="com.epam.esm.service.serviceImpl.TagServiceImplTest" />
+    <option name="METHOD_NAME" value="" />
+    <option name="TEST_OBJECT" value="class" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

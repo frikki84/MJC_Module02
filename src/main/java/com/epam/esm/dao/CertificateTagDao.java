@@ -1,7 +1,6 @@
 package com.epam.esm.dao;
 
-import com.epam.esm.entity.CertificateWithTagFromDb;
-import com.epam.esm.entity.GiftCertificateDTO;
+import com.epam.esm.entity.dto.CertificateWithTagFromDb;
 
 import java.util.List;
 
