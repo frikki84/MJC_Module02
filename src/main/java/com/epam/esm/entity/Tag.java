@@ -2,30 +2,27 @@ package com.epam.esm.entity;
 
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.Objects;
 
 
 @ResponseBody
 public class Tag {
     private long id;
-
-    @NotBlank(message = "The field can't be empty")
-    @Size(min = 3, max = 32, message = "The certificate name could be between 3 and 20 symbols")
     private String nameTag;
 
     public Tag() {
     }
 
-    public Tag(long id, @NotBlank(message = "The field can't be empty") @Size(min = 3, max = 32, message = "The certificate name could be between 3 and 20 symbols") String nameTag) {
+    public Tag(String name) {
+        this.nameTag = name;
+    }
+
+
+    public Tag(long id, String nameTag) {
         this.id = id;
         this.nameTag = nameTag;
     }
 
-    public Tag(String name) {
-        this.nameTag = name;
-    }
 
     public long getId() {
         return id;

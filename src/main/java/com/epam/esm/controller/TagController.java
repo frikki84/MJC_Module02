@@ -1,6 +1,7 @@
 package com.epam.esm.controller;
 
 import com.epam.esm.entity.Tag;
+import com.epam.esm.entity.dto.TagDto;
 import com.epam.esm.exception.CustomErrorCode;
 import com.epam.esm.exception.NoSuchResourceException;
 import com.epam.esm.exception.TagAlreadyExistsException;
@@ -8,7 +9,6 @@ import com.epam.esm.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -34,17 +34,28 @@ public class TagController {
     public Tag findTag(@PathVariable("name") String name) {
         Tag tag = tagService.findTag(name);
         if (tag == null) {
-            throw  new NoSuchResourceException("There is no tag with name " + name, CustomErrorCode.TAG);
+            throw new NoSuchResourceException("There is no tag with name " + name, CustomErrorCode.TAG);
+        }
+        return tag;
+    }
+
+    @GetMapping("/{id}")
+    public Tag findTag(@PathVariable("name") long id) {
+        Tag tag = tagService.findTag(id);
+        if (tag == null) {
+            throw new NoSuchResourceException("There is no tag with name " + id, CustomErrorCode.TAG);
         }
         return tag;
     }
 
     @PostMapping()
     @ResponseBody
-    public void createNewTag(@RequestBody @Valid Tag tag) {
-         Tag createdTag = tagService.addNewTag(tag);
-         if (createdTag == null)
-             throw new TagAlreadyExistsException("This tag " + createdTag.getNameTag() + " already exists in DataBase", CustomErrorCode.TAG);
+    public Tag createNewTag(@RequestBody TagDto tag) {
+        Tag createdTag = tagService.addNewTag(tag);
+        if (createdTag == null) {
+            throw new TagAlreadyExistsException("This tag " + createdTag.getNameTag() + " already exists in DataBase", CustomErrorCode.TAG);
+        }
+        return createdTag;
     }
 
     @DeleteMapping("/{id}")
