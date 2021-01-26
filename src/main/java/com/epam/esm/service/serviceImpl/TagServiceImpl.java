@@ -4,7 +4,7 @@ import com.epam.esm.dao.TagDao;
 import com.epam.esm.entity.Tag;
 import com.epam.esm.entity.dto.TagDto;
 import com.epam.esm.service.TagService;
-import com.epam.esm.service.entitydtomapper.TagDtoMapper;
+import com.epam.esm.service.mapper.TagDtoMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

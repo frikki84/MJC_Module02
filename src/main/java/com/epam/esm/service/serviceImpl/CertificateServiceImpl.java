@@ -6,7 +6,7 @@ import com.epam.esm.entity.Tag;
 import com.epam.esm.entity.dto.CertificateDto;
 import com.epam.esm.entity.GiftCertificate;
 import com.epam.esm.service.CertificateService;
-import com.epam.esm.service.entitydtomapper.CertificateDtoMapper;
+import com.epam.esm.service.mapper.CertificateDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package com.epam.esm.service.entitydtomapper;
+package com.epam.esm.service.mapper;
 
 import com.epam.esm.entity.dto.CertificateDto;
 import com.epam.esm.entity.Tag;

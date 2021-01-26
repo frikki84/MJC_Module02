@@ -26,7 +26,7 @@ class TagServiceImplTest {
         // Создадим базу данных для тестирования
         embeddedDatabase = new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)// Используем базу H2
-                .addScript("/db/tag.sql")
+                .addScript("/db/mydb.sql")
                 .build();
 
         // Создадим JdbcTemplate

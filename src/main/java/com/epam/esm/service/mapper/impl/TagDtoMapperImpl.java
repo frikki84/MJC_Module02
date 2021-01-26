@@ -1,9 +1,9 @@
-package com.epam.esm.service.entitydtomapper.impl;
+package com.epam.esm.service.mapper.impl;
 
 import com.epam.esm.entity.dto.CertificateDto;
 import com.epam.esm.entity.Tag;
 import com.epam.esm.entity.dto.TagDto;
-import com.epam.esm.service.entitydtomapper.TagDtoMapper;
+import com.epam.esm.service.mapper.TagDtoMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
