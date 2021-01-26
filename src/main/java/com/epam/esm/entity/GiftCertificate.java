@@ -1,6 +1,5 @@
 package com.epam.esm.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.math.BigDecimal;
@@ -46,6 +45,7 @@ public class GiftCertificate {
         this.createDate = createDate;
         this.lastUpdateDate = lastUpdateDate;
     }
+
 
     public long getId() {
         return id;

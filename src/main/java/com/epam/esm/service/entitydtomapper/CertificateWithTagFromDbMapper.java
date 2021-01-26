@@ -1,10 +1,10 @@
 package com.epam.esm.service.entitydtomapper;
 
 import com.epam.esm.entity.dto.CertificateWithTagFromDb;
-import com.epam.esm.entity.dto.GiftCertificateDto;
+import com.epam.esm.entity.dto.CertificateDto;
 
 import java.util.List;
 
 public interface CertificateWithTagFromDbMapper {
-    public List<GiftCertificateDto> createDTOList(List<CertificateWithTagFromDb> list);
+    public List<CertificateDto> createDTOList(List<CertificateWithTagFromDb> list);
 }

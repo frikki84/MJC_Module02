@@ -6,7 +6,8 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
-public class MyServletDispatcher extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class MyServletDispatcher
+        extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
     protected Class<?>[] getRootConfigClasses() {

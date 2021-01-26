@@ -1,8 +1,7 @@
 package com.epam.esm.service.entitydtomapper.impl;
 
-import com.epam.esm.entity.dto.CertificateWithTagFromDb;
 import com.epam.esm.entity.GiftCertificate;
-import com.epam.esm.entity.dto.GiftCertificateDto;
+import com.epam.esm.entity.dto.CertificateDto;
 import com.epam.esm.entity.Tag;
 import com.epam.esm.service.entitydtomapper.CertificateDtoMapper;
 import org.springframework.stereotype.Component;
@@ -14,15 +13,15 @@ import java.util.List;
 public class CertificateDtoMapperImpl implements CertificateDtoMapper {
 
     @Override
-    public GiftCertificate changeDtoToCertificate(GiftCertificateDto dto) {
+    public GiftCertificate changeDtoToCertificate(CertificateDto dto) {
         GiftCertificate certificate = new GiftCertificate(dto.getName(), dto.getDescription(), dto.getPrice()
                 , dto.getDuration());
         return certificate;
     }
 
     @Override
-    public GiftCertificateDto changeCertificateToDto(GiftCertificate certificate, List<Tag> tagList) {
-        GiftCertificateDto dto = new GiftCertificateDto(certificate, tagList);
+    public CertificateDto changeCertificateToDto(GiftCertificate certificate, List<Tag> tagList) {
+        CertificateDto dto = new CertificateDto(certificate, tagList);
         return dto;
     }
 

@@ -2,7 +2,7 @@ package com.epam.esm.service.serviceImpl;
 
 import com.epam.esm.dao.CertificateTagDao;
 import com.epam.esm.entity.GiftCertificate;
-import com.epam.esm.entity.dto.GiftCertificateDto;
+import com.epam.esm.entity.dto.CertificateDto;
 import com.epam.esm.entity.Tag;
 import com.epam.esm.service.CertificateService;
 import com.epam.esm.service.CertificateTagService;
@@ -35,7 +35,7 @@ public class CertificateTagServiceImpl implements CertificateTagService {
     }
 
     @Override
-    public long createNewCertificateWithTags(GiftCertificateDto dto) {
+    public long createNewCertificateWithTags(CertificateDto dto) {
         GiftCertificate certificate = certificateMapper.changeDtoToCertificate(dto);
         long certificateId = certificateService.createNewCertificate(certificate);
 

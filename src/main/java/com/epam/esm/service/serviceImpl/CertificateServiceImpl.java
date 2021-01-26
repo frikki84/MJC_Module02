@@ -1,36 +1,31 @@
 package com.epam.esm.service.serviceImpl;
 
 import com.epam.esm.dao.CertificateDao;
-import com.epam.esm.dao.CertificateTagDao;
-import com.epam.esm.entity.dto.CertificateWithTagFromDb;
+import com.epam.esm.dao.TagDao;
+import com.epam.esm.entity.Tag;
+import com.epam.esm.entity.dto.CertificateDto;
 import com.epam.esm.entity.GiftCertificate;
-import com.epam.esm.entity.dto.GiftCertificateDto;
 import com.epam.esm.service.CertificateService;
 import com.epam.esm.service.entitydtomapper.CertificateDtoMapper;
-import com.epam.esm.service.entitydtomapper.CertificateWithTagFromDbMapper;
-import com.epam.esm.service.entitydtomapper.TagDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class CertificateServiceImpl implements CertificateService {
     private final CertificateDao certificateDao;
-    private final CertificateTagDao certificateTagDao;
+    private final TagDao tagDao;
     private final CertificateDtoMapper certificateMapper;
-    private final CertificateWithTagFromDbMapper certificateWithTagFromDbMapper;
-
 
     @Autowired
-    public CertificateServiceImpl(CertificateDao certificateDao, CertificateTagDao certificateTagDao, CertificateDtoMapper certificateMapper, TagDtoMapper tagDtoMapper, CertificateWithTagFromDbMapper certificateWithTagFromDbMapper) {
+    public CertificateServiceImpl(CertificateDao certificateDao, TagDao tagDao, CertificateDtoMapper certificateMapper) {
         this.certificateDao = certificateDao;
-        this.certificateTagDao = certificateTagDao;
+        this.tagDao = tagDao;
         this.certificateMapper = certificateMapper;
-        this.certificateWithTagFromDbMapper = certificateWithTagFromDbMapper;
     }
 
     public List<GiftCertificate> findAllCertificates() {
@@ -45,14 +40,13 @@ public class CertificateServiceImpl implements CertificateService {
         LocalDateTime currentDate = LocalDateTime.now();
         certificate.setCreateDate(currentDate);
         certificate.setLastUpdateDate(currentDate);
-
         long certificateId = certificateDao.createNewCertificate(certificate);
 
         return certificateId;
     }
 
     @Override
-    public void updateCertificate(GiftCertificate certificate, long id) {
+    public Integer updateCertificate(GiftCertificate certificate, long id) {
         GiftCertificate certificateFromDb = certificateDao.findCertificateById(id);
         if (certificate.getName() != null) {
             certificateFromDb.setName(certificate.getName());
@@ -63,7 +57,7 @@ public class CertificateServiceImpl implements CertificateService {
         if (certificate.getPrice() != null) {
             certificateFromDb.setPrice(certificate.getPrice());
         }
-        if (certificate.getDuration() != 0) {
+        if (certificate.getDuration() != null) {
             certificateFromDb.setDuration(certificate.getDuration());
         }
         if (certificate.getCreateDate() != null) {
@@ -73,7 +67,8 @@ public class CertificateServiceImpl implements CertificateService {
         LocalDateTime currentDate = LocalDateTime.now();
         certificateFromDb.setLastUpdateDate(currentDate);
 
-        certificateDao.updateCertificate(certificateFromDb, id);
+       int fildsNumber =  certificateDao.updateCertificate(certificateFromDb, id);
+       return fildsNumber;
     }
 
     @Override
@@ -82,63 +77,39 @@ public class CertificateServiceImpl implements CertificateService {
     }
 
     @Override
-    public List<GiftCertificateDto> findCertificatesWithTags() {
-        List<CertificateWithTagFromDb> list = certificateTagDao.findAllCertificatesWithTagsFromDb();
-        List<GiftCertificateDto> resultList = certificateWithTagFromDbMapper.createDTOList(list);
-        return resultList;
+    public List<CertificateDto> findCertificatesByTagName(String tagName) {
+        List<GiftCertificate> list = certificateDao.findCertificatesByTag(tagName);
+        List<CertificateDto> dtoList = createCertificateListToDto(list);
+        return dtoList;
     }
+
 
     @Override
-    public List<GiftCertificateDto> findAllCertificatesWithTagsByTagName(String tagName) {
-        List<GiftCertificateDto> list = findCertificatesWithTags();
-
-        List<GiftCertificateDto> resultList = list.stream()
-                .filter(giftCertificateDTO -> giftCertificateDTO.getTagList()
-                        .stream().anyMatch(tag -> tagName.equalsIgnoreCase(tag.getNameTag()))
-                ).collect(Collectors.toList());
-
-        return resultList;
+    public List<CertificateDto> sortAllCertificatesByNameAsc() {
+        List<GiftCertificate> certificateList = certificateDao.findCertificatesOrderedByNameAsc();
+        List<CertificateDto> dtoList = createCertificateListToDto(certificateList);
+        return dtoList;
     }
+
 
     @Override
-    public List<GiftCertificateDto> sortAllCertificatesByNameAsc() {
-        List<GiftCertificateDto> list = findCertificatesWithTags();
-
-        List<GiftCertificateDto> resultList = list.stream()
-                .sorted(((o1, o2) -> o1.getName().compareTo(o2.getName()))
-                ).collect(Collectors.toList());
-
-        return resultList;
+    public List<CertificateDto> findAllCertificatesByNameDescriptionPart(String namePart) {
+        List<GiftCertificate> list = certificateDao.findCertificatesByNameOrDescriptionPart(namePart);
+        System.out.println("Service " + list);
+        List<CertificateDto> dtoList = createCertificateListToDto(list);
+        return dtoList;
     }
 
-    @Override
-    public List<GiftCertificateDto> sortAllCertificatesByNameDesc() {
-        List<GiftCertificateDto> list = findCertificatesWithTags();
-
-        List<GiftCertificateDto> resultList = list.stream()
-                .sorted(((o1, o2) -> o2.getName().compareTo(o1.getName()))
-                ).collect(Collectors.toList());
-
-        return resultList;
+    private List<CertificateDto> createCertificateListToDto(List<GiftCertificate> list) {
+        List<CertificateDto> dtoList = new ArrayList<>();
+        for (GiftCertificate certificate : list) {
+            List<Tag> tagList = tagDao.findTagsByCertificateId(certificate.getId());
+            dtoList.add(certificateMapper.changeCertificateToDto(certificate, tagList));
+        }
+        return dtoList;
     }
 
-    @Override
-    public List<GiftCertificateDto> sortAllCertificatesByNameTime() {
-        List<GiftCertificateDto> list = findCertificatesWithTags();
 
-        List<GiftCertificateDto> resultList = list.stream()
-                .sorted((o1, o2) -> o1.getName() != o2.getName() ? o1.getName().
-                        compareTo(o2.getName()) : o1.getCreateDate().compareTo(o2.getCreateDate())
-                ).collect(Collectors.toList());
 
-        return resultList;
-    }
-
-    @Override
-    public List<GiftCertificateDto> findAllCertificatesWithTagsByNameOrDescriptionPart(String namePart) {
-        List<CertificateWithTagFromDb> list = certificateTagDao.findAllCertificatesWithTagsByNameOrDescriptionPart(namePart);
-        List<GiftCertificateDto> resultList = certificateWithTagFromDbMapper.createDTOList(list);
-        return resultList;
-    }
 }
 

@@ -7,8 +7,7 @@ import java.util.List;
 public interface CertificateTagDao {
 
     public long createNewCertificateTagRelation(long certificateId, long tagId);
-    public List<CertificateWithTagFromDb> findAllCertificatesWithTagsFromDb();
-    public List<CertificateWithTagFromDb> findAllCertificatesWithTagsByNameOrDescriptionPart(String namePart);
+
 
 
 }

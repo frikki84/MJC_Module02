@@ -39,5 +39,13 @@ public class ApplicationExceptionHandler {
         return new ResponseEntity<>(data, status);
     }
 
+    @ExceptionHandler({GeneralException.class})
+    public ResponseEntity<ExceptionDetails> handlerGeneralException(GeneralException exception) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        String errorCode = status.value() + exception.getCode();
+        ExceptionDetails data = new ExceptionDetails(LocalDateTime.now(), status.value(), exception.getMessage(), errorCode);
+        return new ResponseEntity<>(data, status);
+    }
+
 
 }

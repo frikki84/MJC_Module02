@@ -1,8 +1,9 @@
 package com.epam.esm.controller;
 
 import com.epam.esm.entity.GiftCertificate;
-import com.epam.esm.entity.dto.GiftCertificateDto;
+import com.epam.esm.entity.dto.CertificateDto;
 import com.epam.esm.exception.CustomErrorCode;
+import com.epam.esm.exception.GeneralException;
 import com.epam.esm.exception.InvalidDataException;
 import com.epam.esm.exception.NoSuchResourceException;
 import com.epam.esm.service.CertificateService;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/certificates")
+@RequestMapping("/certificate")
 public class CertificatesController {
     private final CertificateService certificateService;
     private final CertificateTagService certificateTagService;
@@ -22,7 +23,6 @@ public class CertificatesController {
         this.certificateService = certificateService;
         this.certificateTagService = certificateTagService;
     }
-
 
     @GetMapping()
     public List<GiftCertificate> findAllCertificates() {
@@ -41,7 +41,7 @@ public class CertificatesController {
 
     @PostMapping()
     @ResponseBody
-    public long createNewCertificate(@RequestBody GiftCertificateDto certificateDto) {
+    public long createNewCertificate(@RequestBody CertificateDto certificateDto) {
         String dtoChecking = CertificateDTOChecking.chechCertificateDtoFormat(certificateDto);
         if (dtoChecking != null) {
             throw  new InvalidDataException(dtoChecking, CustomErrorCode.CERTIFICATE);
@@ -50,10 +50,15 @@ public class CertificatesController {
        return  id;
     }
 
-    @PatchMapping("/{id}")
+    @PutMapping("/{id}")
     @ResponseBody
-    public void updateCertificate(@RequestBody GiftCertificate certificate, @PathVariable("id") long id) {
-        certificateService.updateCertificate(certificate, id);
+    public Integer updateCertificate(@RequestBody GiftCertificate certificate, @PathVariable("id") long id) throws GeneralException {
+        Integer updatesNumber = certificateService.updateCertificate(certificate, id);
+
+        if (updatesNumber == null) {
+            throw  new NoSuchResourceException("No certificate with id " + id, CustomErrorCode.CERTIFICATE);
+        }
+        return updatesNumber;
     }
 
     @DeleteMapping("/{id}")
@@ -61,39 +66,25 @@ public class CertificatesController {
         certificateService.deleteCertificate(id);
     }
 
-    @GetMapping("/info")
-    public List<GiftCertificateDto> findCertificatesWithTags() {
-        List<GiftCertificateDto> certificateList = certificateService.findCertificatesWithTags();
+    @GetMapping("/tag={tagName}")
+    public List<CertificateDto> findCertificatesByTag(@PathVariable("tagName") String tagName) {
+        List<CertificateDto> certificateList = certificateService.findCertificatesByTagName(tagName);
+        if (certificateList.isEmpty()) {
+            throw new NoSuchResourceException("No certificates with tag " + tagName, CustomErrorCode.CERTIFICATE);
+        }
         return certificateList;
     }
 
-    @GetMapping("/info/{tagName}")
-    public List<GiftCertificateDto> findCertificatesByTag(@PathVariable("tagName") String tagName) {
-        List<GiftCertificateDto> certificateList = certificateService.findAllCertificatesWithTagsByTagName(tagName);
+    @GetMapping("/sort_by=name(asc)")
+    public List<CertificateDto> sortCertificatesByNameAsc() {
+        List<CertificateDto> certificateList = certificateService.sortAllCertificatesByNameAsc();
         return certificateList;
     }
 
-    @GetMapping("/info/sort_name_asc")
-    public List<GiftCertificateDto> sortCertificatesByNameAsc() {
-        List<GiftCertificateDto> certificateList = certificateService.sortAllCertificatesByNameAsc();
-        return certificateList;
-    }
 
-    @GetMapping("/info/sort_name_decs")
-    public List<GiftCertificateDto> sortCertificatesByNameDecs() {
-        List<GiftCertificateDto> certificateList = certificateService.sortAllCertificatesByNameDesc();
-        return certificateList;
-    }
-
-    @GetMapping("/info/sort_name+time")
-    public List<GiftCertificateDto> sortCertificatesByNameTime() {
-        List<GiftCertificateDto> certificateList = certificateService.sortAllCertificatesByNameTime();
-        return certificateList;
-    }
-
-    @GetMapping("/info/find/{namePart}")
-    public List<GiftCertificateDto> findAllCertificatesWithTagsByNameOrDescriptionPart(@PathVariable("namePart") String namePart) {
-        List<GiftCertificateDto> certificateList = certificateService.findAllCertificatesWithTagsByNameOrDescriptionPart(namePart);
+    @GetMapping("/name={namePart}")
+    public List<CertificateDto> findAllCertificatesWithTagsByNameOrDescriptionPart(@PathVariable("namePart") String namePart) {
+        List<CertificateDto> certificateList = certificateService.findAllCertificatesByNameDescriptionPart(namePart);
         return certificateList;
     }
 

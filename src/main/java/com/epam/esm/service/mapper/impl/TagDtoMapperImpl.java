@@ -1,6 +1,6 @@
 package com.epam.esm.service.entitydtomapper.impl;
 
-import com.epam.esm.entity.dto.GiftCertificateDto;
+import com.epam.esm.entity.dto.CertificateDto;
 import com.epam.esm.entity.Tag;
 import com.epam.esm.entity.dto.TagDto;
 import com.epam.esm.service.entitydtomapper.TagDtoMapper;
@@ -23,7 +23,7 @@ public class TagDtoMapperImpl implements TagDtoMapper {
     }
 
     @Override
-    public List<Tag> changeCertificateDtoToTagList(GiftCertificateDto dto) {
+    public List<Tag> changeCertificateDtoToTagList(CertificateDto dto) {
         List<Tag> tagList = dto.getTagList();
         return tagList;
 
