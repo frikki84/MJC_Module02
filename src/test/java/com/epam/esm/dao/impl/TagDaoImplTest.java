@@ -1,9 +1,11 @@
-package com.epam.esm.service.serviceImpl;
+package com.epam.esm.dao.impl;
 
 import com.epam.esm.dao.TagDao;
 import com.epam.esm.dao.impl.TagDaoImpl;
 import com.epam.esm.entity.Tag;
+import com.epam.esm.exception.TagAlreadyExistsException;
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
@@ -14,7 +16,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TagServiceImplTest {
+class TagDaoImplTest {
     private EmbeddedDatabase embeddedDatabase;
 
     private JdbcTemplate jdbcTemplate;
@@ -25,7 +27,7 @@ class TagServiceImplTest {
     public void setUp() {
         // Создадим базу данных для тестирования
         embeddedDatabase = new EmbeddedDatabaseBuilder()
-                .setType(EmbeddedDatabaseType.H2)// Используем базу H2
+                .setType(EmbeddedDatabaseType.H2)
                 .addScript("/db/mydb.sql")
                 .build();
 
@@ -38,30 +40,31 @@ class TagServiceImplTest {
 
     @Test
     public  void findAllTagList() {
-        Assert.assertNotNull(tagDao.findAllTagList());
-        assertEquals(4, tagDao.findAllTagList().size());
+        Assertions.assertNotNull(tagDao.findAllTagList());
+        Assertions.assertEquals(6, tagDao.findAllTagList().size());
     }
 
     @Test
     public void findTag() {
-        Assert.assertNotNull(tagDao.findTag("spa"));
-        Assert.assertNull(tagDao.findTag("lalala"));
+        Assertions.assertNotNull(tagDao.findTag("spa"));
+        Assertions.assertNull(tagDao.findTag("lalala"));
     }
 
     @Test
     public void findTagID() {
-        Assert.assertNotNull(tagDao.findTag(1));
-        Assert.assertNull(tagDao.findTag(130));
+        Assertions.assertNotNull(tagDao.findTag(1));
+        Assertions.assertNull(tagDao.findTag(130));
     }
 
     @Test
     public void addNewTag() {
-        Tag tag = tagDao.addNewTag(new Tag(5,"swimming"));
-        Assert.assertNotNull(tag);
-        Assert.assertNotNull(tag.getId());
-        Assert.assertEquals(tag, new Tag(5, "swimming"));
-
-
+        Tag tag = tagDao.addNewTag(new Tag(7,"swimming"));
+        Assertions.assertNotNull(tag);
+        Assertions.assertNotNull(tag.getId());
+        Assertions.assertEquals(tag, new Tag(7, "swimming"));
+//        Assertions.assertThrows(RuntimeException.class, () -> {
+//            tagDao.addNewTag(new Tag("spa"));
+//        });
     }
 
 
@@ -71,5 +74,4 @@ class TagServiceImplTest {
         embeddedDatabase.shutdown();
     }
 
-
-}
+    }

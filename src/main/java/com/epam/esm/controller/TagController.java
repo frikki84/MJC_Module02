@@ -43,7 +43,7 @@ public class TagController {
     public Tag findTag(@PathVariable("name") long id) {
         Tag tag = tagService.findTag(id);
         if (tag == null) {
-            throw new NoSuchResourceException("There is no tag with name " + id, CustomErrorCode.TAG);
+            throw new NoSuchResourceException("There is no tag with id " + id, CustomErrorCode.TAG);
         }
         return tag;
     }

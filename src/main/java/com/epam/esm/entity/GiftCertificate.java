@@ -45,8 +45,6 @@ public class GiftCertificate {
         this.createDate = createDate;
         this.lastUpdateDate = lastUpdateDate;
     }
-
-
     public long getId() {
         return id;
     }

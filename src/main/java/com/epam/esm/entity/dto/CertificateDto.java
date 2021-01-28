@@ -21,7 +21,7 @@ public class CertificateDto {
     private LocalDateTime createDate;
     private LocalDateTime lastUpdateDate;
 
-    List<Tag> tagList = new ArrayList<>();
+    List<Tag> tagList;
 
     public CertificateDto() {
     }
@@ -33,6 +33,7 @@ public class CertificateDto {
         this.duration = duration;
         this.createDate = createDate;
         this.lastUpdateDate = lastUpdateDate;
+        tagList = new ArrayList<>();
     }
 
     public CertificateDto(String name, String description, BigDecimal price, Integer duration, LocalDateTime createDate, LocalDateTime lastUpdateDate, List<Tag> tagList) {
@@ -64,6 +65,7 @@ public class CertificateDto {
         this.duration = duration;
         this.createDate = createDate;
         this.lastUpdateDate = lastUpdateDate;
+        tagList = new ArrayList<>();
     }
 
     public CertificateDto(GiftCertificate certificate, List<Tag> tagList) {

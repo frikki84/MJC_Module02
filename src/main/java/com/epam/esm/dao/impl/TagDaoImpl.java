@@ -69,8 +69,9 @@ public class TagDaoImpl implements TagDao {
 
         }, generatedKeyHolder);
 
-        long key = ((BigInteger)generatedKeyHolder.getKey()).longValue();
+        long key = (generatedKeyHolder.getKey()).longValue();
         tag.setId(key);
+        System.out.println("Tag creation " + tag);
         return tag;
     }
 

@@ -5,6 +5,8 @@ import com.epam.esm.dao.TagDao;
 import com.epam.esm.entity.Tag;
 import com.epam.esm.entity.dto.CertificateDto;
 import com.epam.esm.entity.GiftCertificate;
+import com.epam.esm.exception.CustomErrorCode;
+import com.epam.esm.exception.NoSuchResourceException;
 import com.epam.esm.service.CertificateService;
 import com.epam.esm.service.mapper.CertificateDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +30,17 @@ public class CertificateServiceImpl implements CertificateService {
         this.certificateMapper = certificateMapper;
     }
 
+
     public List<GiftCertificate> findAllCertificates() {
         return certificateDao.findAllCertificates();
     }
 
     public GiftCertificate findCertificateById(long id) {
-        return certificateDao.findCertificateById(id);
+        GiftCertificate certificate = certificateDao.findCertificateById(id);
+        if (certificate == null) {
+            throw new NoSuchResourceException("There is no tag with name " + id, CustomErrorCode.TAG);
+        }
+        return certificate;
     }
 
     public long createNewCertificate(GiftCertificate certificate) {

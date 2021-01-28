@@ -68,7 +68,7 @@ public class CertificateDaoImpl implements CertificateDao {
 
         }, generatedKeyHolder);
 
-        Long key = ((BigInteger) generatedKeyHolder.getKey()).longValue();
+        Long key = (generatedKeyHolder.getKey()).longValue();
         return key;
     }
 
