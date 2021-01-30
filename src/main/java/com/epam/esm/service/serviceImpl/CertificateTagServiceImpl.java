@@ -35,7 +35,7 @@ public class CertificateTagServiceImpl implements CertificateTagService {
     }
 
     @Override
-    public long createNewCertificateWithTags(CertificateDto dto) {
+    public Integer createNewCertificateWithTags(CertificateDto dto) {
         GiftCertificate certificate = certificateMapper.changeDtoToCertificate(dto);
         long certificateId = certificateService.createNewCertificate(certificate);
 
@@ -43,7 +43,7 @@ public class CertificateTagServiceImpl implements CertificateTagService {
         List<Tag> tagList = tagDtoMapper.changeCertificateDtoToTagList(dto);
         System.out.println("taglist " + tagList);
 
-        long resultField = 0;
+        Integer resultField = 0;
 
         for (Tag tag : tagList) {
             long tagId = 0;

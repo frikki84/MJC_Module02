@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface CertificateTagService {
-    public long createNewCertificateWithTags(CertificateDto dto);
+    public Integer createNewCertificateWithTags(CertificateDto dto);
 
 
 

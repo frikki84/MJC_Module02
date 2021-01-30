@@ -36,6 +36,8 @@ public class GiftCertificate {
         this.lastUpdateDate = lastUpdateDate;
     }
 
+
+
     public GiftCertificate(long id, String name, String description, BigDecimal price, Integer duration, LocalDateTime createDate, LocalDateTime lastUpdateDate) {
         this.id = id;
         this.name = name;

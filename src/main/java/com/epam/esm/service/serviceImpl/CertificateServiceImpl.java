@@ -43,11 +43,11 @@ public class CertificateServiceImpl implements CertificateService {
         return certificate;
     }
 
-    public long createNewCertificate(GiftCertificate certificate) {
+    public Integer createNewCertificate(GiftCertificate certificate) {
         LocalDateTime currentDate = LocalDateTime.now();
         certificate.setCreateDate(currentDate);
         certificate.setLastUpdateDate(currentDate);
-        long certificateId = certificateDao.createNewCertificate(certificate);
+        Integer certificateId = certificateDao.createNewCertificate(certificate);
 
         return certificateId;
     }
@@ -79,8 +79,8 @@ public class CertificateServiceImpl implements CertificateService {
     }
 
     @Override
-    public void deleteCertificate(long id) {
-        certificateDao.deleteCertificate(id);
+    public Integer deleteCertificate(long id) {
+        return certificateDao.deleteCertificate(id);
     }
 
     @Override

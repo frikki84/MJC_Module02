@@ -53,7 +53,7 @@ public class CertificateDaoImpl implements CertificateDao {
         return certificate;
     }
 
-    public long createNewCertificate(GiftCertificate certificate) {
+    public Integer createNewCertificate(GiftCertificate certificate) {
         KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
         template.update(connection -> {
             PreparedStatement ps = connection
@@ -68,7 +68,7 @@ public class CertificateDaoImpl implements CertificateDao {
 
         }, generatedKeyHolder);
 
-        Long key = (generatedKeyHolder.getKey()).longValue();
+        Integer key = (generatedKeyHolder.getKey()).intValue();
         return key;
     }
 
@@ -82,8 +82,9 @@ public class CertificateDaoImpl implements CertificateDao {
 
     }
 
-    public void deleteCertificate(long id) {
-        template.update(SQL_QUERY_DELETE_CERTIFICATE, id);
+    public Integer deleteCertificate(long id) {
+       Integer deleteFields =  template.update(SQL_QUERY_DELETE_CERTIFICATE, id);
+       return  deleteFields;
 
     }
 

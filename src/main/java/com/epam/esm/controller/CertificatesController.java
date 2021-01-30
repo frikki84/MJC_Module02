@@ -41,12 +41,12 @@ public class CertificatesController {
 
     @PostMapping()
     @ResponseBody
-    public long createNewCertificate(@RequestBody CertificateDto certificateDto) {
+    public Integer createNewCertificate(@RequestBody CertificateDto certificateDto) {
         String dtoChecking = CertificateDTOChecking.chechCertificateDtoFormat(certificateDto);
         if (dtoChecking != null) {
             throw  new InvalidDataException(dtoChecking, CustomErrorCode.CERTIFICATE);
         }
-       Long id =  certificateTagService.createNewCertificateWithTags(certificateDto);
+       Integer id =  certificateTagService.createNewCertificateWithTags(certificateDto);
        return  id;
     }
 
@@ -62,8 +62,12 @@ public class CertificatesController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCertificate(@PathVariable("id") int id) {
-        certificateService.deleteCertificate(id);
+    public Integer deleteCertificate(@PathVariable("id") int id) {
+        Integer deleteFields = certificateService.deleteCertificate(id);
+        if (deleteFields == null) {
+            throw  new NoSuchResourceException("No certificate with id " + id, CustomErrorCode.CERTIFICATE);
+        }
+        return deleteFields;
     }
 
     @GetMapping("/tag={tagName}")

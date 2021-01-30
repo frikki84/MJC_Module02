@@ -8,9 +8,9 @@ import java.util.List;
 public interface CertificateService {
     public List<GiftCertificate> findAllCertificates();
     public GiftCertificate findCertificateById(long id);
-    public long createNewCertificate(GiftCertificate certificate);
+    public Integer createNewCertificate(GiftCertificate certificate);
     public Integer updateCertificate(GiftCertificate certificate, long id);
-    public void deleteCertificate(long id);
+    public Integer deleteCertificate(long id);
     public List<CertificateDto> findCertificatesByTagName(String tagName);
     public List<CertificateDto> sortAllCertificatesByNameAsc();
     public List<CertificateDto> findAllCertificatesByNameDescriptionPart(String namePart);
