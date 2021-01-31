@@ -3,10 +3,9 @@ package com.epam.esm.service.serviceImpl;
 import com.epam.esm.dao.CertificateDao;
 import com.epam.esm.dao.TagDao;
 import com.epam.esm.entity.GiftCertificate;
-import com.epam.esm.entity.Tag;
-import com.epam.esm.entity.dto.CertificateDto;
 import com.epam.esm.exception.CustomErrorCode;
 import com.epam.esm.exception.NoSuchResourceException;
+import com.epam.esm.service.CertificateService;
 import com.epam.esm.service.mapper.CertificateDtoMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -19,14 +18,13 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
 @ExtendWith(MockitoExtension.class)
-class CertificateServiceImplTest {
+class CertificateServiceTest {
     @InjectMocks
-    private CertificateServiceImpl certificateService;
+    private CertificateService certificateService;
 
     @Mock
     private CertificateDao certificateDao;
