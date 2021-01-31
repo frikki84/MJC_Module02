@@ -59,9 +59,12 @@ public class TagController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCertificate(@PathVariable("id") int id) {
-        tagService.deleteTag(id);
-
+    public Integer deleteCertificate(@PathVariable("id") int id) {
+        Integer fields = tagService.deleteTag(id);
+        if (fields == null || fields == 0) {
+            throw new NoSuchResourceException("There is no tag with id " + id, CustomErrorCode.TAG);
+        }
+        return  fields;
     }
 
 

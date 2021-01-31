@@ -11,7 +11,7 @@ public interface TagDao {
     public Tag findTag(long id);
     public Tag findTag(String name);
     public Tag addNewTag(Tag tag);
-    public void deleteTag(long id);
+    public Integer deleteTag(long id);
     public List<Tag> findTagsByCertificateId(long certificateId);
 
 }

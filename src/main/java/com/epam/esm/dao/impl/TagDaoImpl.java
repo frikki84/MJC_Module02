@@ -71,13 +71,14 @@ public class TagDaoImpl implements TagDao {
 
         long key = (generatedKeyHolder.getKey()).longValue();
         tag.setId(key);
-        System.out.println("Tag creation " + tag);
         return tag;
     }
 
     @Override
-    public void deleteTag(long id) {
-        template.update(SQL_QUERY_DELETE_TAG, id);
+    public Integer deleteTag(long id) {
+        Integer fildsNumber = template.update(SQL_QUERY_DELETE_TAG, id);
+        return fildsNumber;
+
 
     }
 

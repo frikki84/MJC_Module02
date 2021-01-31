@@ -42,6 +42,7 @@ CREATE TABLE gift_certificate_has_tag (
 INSERT INTO gift_certificate_has_tag (gift_certicicate_id_gift_certicicate, tag_id_tag) VALUES (1, 1);
 INSERT INTO gift_certificate_has_tag (gift_certicicate_id_gift_certicicate, tag_id_tag) VALUES (1, 2);
 INSERT INTO gift_certificate_has_tag (gift_certicicate_id_gift_certicicate, tag_id_tag) VALUES (2, 3);
+INSERT INTO gift_certificate_has_tag (gift_certicicate_id_gift_certicicate, tag_id_tag) VALUES (3, 3);
 INSERT INTO gift_certificate_has_tag (gift_certicicate_id_gift_certicicate, tag_id_tag) VALUES (3, 4);
 INSERT INTO gift_certificate_has_tag (gift_certicicate_id_gift_certicicate, tag_id_tag) VALUES (3, 5);
 INSERT INTO gift_certificate_has_tag (gift_certicicate_id_gift_certicicate, tag_id_tag) VALUES (4, 6);

@@ -40,8 +40,10 @@ public class TagService {
     }
 
 
-    public void deleteTag(long id) {
-        tagDao.deleteTag(id);
+    public Integer deleteTag(long id) {
+
+        Integer fieldsNumber = tagDao.deleteTag(id);
+        return  fieldsNumber;
     }
 
     public Tag addNewTag(TagDto tagDto) {

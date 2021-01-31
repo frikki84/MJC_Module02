@@ -1,11 +1,10 @@
-package com.epam.esm.service.serviceImpl;
+package com.epam.esm.service;
 
 import com.epam.esm.dao.CertificateDao;
 import com.epam.esm.dao.TagDao;
 import com.epam.esm.entity.GiftCertificate;
 import com.epam.esm.exception.CustomErrorCode;
 import com.epam.esm.exception.NoSuchResourceException;
-import com.epam.esm.service.CertificateService;
 import com.epam.esm.service.mapper.CertificateDtoMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
