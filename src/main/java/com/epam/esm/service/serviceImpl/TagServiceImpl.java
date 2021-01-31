@@ -6,10 +6,12 @@ import com.epam.esm.entity.dto.TagDto;
 import com.epam.esm.service.TagService;
 import com.epam.esm.service.mapper.TagDtoMapper;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
+@Transactional
 public class TagServiceImpl implements TagService {
     private final TagDtoMapper tagDtoMapper;
     private final TagDao tagDao;

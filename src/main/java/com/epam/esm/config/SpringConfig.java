@@ -1,9 +1,6 @@
 package com.epam.esm.config;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -19,9 +16,8 @@ import javax.sql.DataSource;
 @Configuration
 @ComponentScan("com.epam.esm")
 @EnableWebMvc
-
+@EnableTransactionManagement
 public class SpringConfig {
-    public static final String MYSQL_PROPERTIES_PROD = "/mysql.properties";
 
     @Bean
     @Profile("dev")
@@ -49,6 +45,11 @@ public class SpringConfig {
     public JdbcTemplate template(DataSource dataSource) {
 
         return new JdbcTemplate(dataSource());
+    }
+
+    @Bean
+    public PlatformTransactionManager txManager(DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
     }
 
 

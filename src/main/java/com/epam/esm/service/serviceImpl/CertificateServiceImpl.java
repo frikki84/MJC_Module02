@@ -11,6 +11,7 @@ import com.epam.esm.service.CertificateService;
 import com.epam.esm.service.mapper.CertificateDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.time.LocalDateTime;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Transactional
 public class CertificateServiceImpl implements CertificateService {
     private final CertificateDao certificateDao;
     private final TagDao tagDao;
