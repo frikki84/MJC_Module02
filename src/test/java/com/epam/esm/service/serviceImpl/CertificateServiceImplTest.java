@@ -131,33 +131,7 @@ class CertificateServiceImplTest {
 
     @Test
     void findCertificatesByTagName() {
-        String tagName = "spa";
 
-        List<GiftCertificate> certificateList = new ArrayList<>();
-        certificateList.add(new GiftCertificate(1, "Spa-comlex", "Spa-complex for 1 person for 3 hours"
-                , new BigDecimal(150), 40, LocalDateTime.of(2021, 01, 20, 13
-                , 06, 22), LocalDateTime.of(2021, 01, 20, 13, 06, 22)));
-        certificateList.add(new GiftCertificate(2, "Spa-comlex", "Spa-complex for 2 persons for 3 hours"
-                , new BigDecimal(250), 40, LocalDateTime.of(2021, 01, 20, 13
-                , 06, 22), LocalDateTime.of(2021, 01, 20, 13, 06, 22)));
-        certificateList.add(new GiftCertificate(3, "Spa-comlex", "Spa-complex for 4 persons for 3 hours"
-                , new BigDecimal(350), 40, LocalDateTime.of(2021, 01, 20, 13
-                , 06, 22), LocalDateTime.of(2021, 01, 20, 13, 06, 22)));
-
-        List<Tag> tagList = Arrays.asList(new Tag(1, "spa"), new Tag(2, "relax"), new Tag(3, "group"));
-
-        Mockito.when(certificateDao.findCertificatesByTag(tagName)).thenReturn(certificateList);
-        System.out.println("crtif\n "+certificateList);
-//        Mockito.doCallRealMethod().when(tagDao.findTagsByCertificateId()).forEach(Mockito.any(Consumer.class));
-
-        //Mockito.doCallRealMethod().when(tagDao.findTagsByCertificateId(certificateList.get()))
-
-//        certificateList.stream().forEach(certificate -> {
-//            Mockito.when(tagDao.findTagsByCertificateId(certificate.getId())).thenReturn(tagList);
-//        });
-        List<CertificateDto> resultList = certificateService.findCertificatesByTagName(tagName);
-        System.out.println(resultList);
-        Assertions.assertEquals(3, resultList.size());
     }
 
 

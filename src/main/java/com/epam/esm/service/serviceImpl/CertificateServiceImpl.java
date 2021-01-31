@@ -102,12 +102,11 @@ public class CertificateServiceImpl implements CertificateService {
     @Override
     public List<CertificateDto> findAllCertificatesByNameDescriptionPart(String namePart) {
         List<GiftCertificate> list = certificateDao.findCertificatesByNameOrDescriptionPart(namePart);
-        System.out.println("Service " + list);
         List<CertificateDto> dtoList = createCertificateListToDto(list);
         return dtoList;
     }
 
-    private List<CertificateDto> createCertificateListToDto(List<GiftCertificate> list) {
+    public List<CertificateDto> createCertificateListToDto(List<GiftCertificate> list) {
         List<CertificateDto> dtoList = new ArrayList<>();
         for (GiftCertificate certificate : list) {
             List<Tag> tagList = tagDao.findTagsByCertificateId(certificate.getId());

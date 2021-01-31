@@ -7,52 +7,51 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.View;
-import org.springframework.web.servlet.ViewResolver;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
-import org.springframework.web.servlet.view.BeanNameViewResolver;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
-import org.thymeleaf.spring5.SpringTemplateEngine;
-import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
-import org.thymeleaf.spring5.view.ThymeleafViewResolver;
-
 import javax.sql.DataSource;
-import java.util.Locale;
 
 @Configuration
 @ComponentScan("com.epam.esm")
 @EnableWebMvc
-public class SpringConfig implements WebMvcConfigurer {
 
-    private final ApplicationContext applicationContext;
-
-    @Autowired
-    public SpringConfig(ApplicationContext applicationContext) {
-        this.applicationContext = applicationContext;
-    }
+public class SpringConfig {
+    public static final String MYSQL_PROPERTIES_PROD = "/mysql.properties";
 
     @Bean
+    @Profile("dev")
     public DataSource dataSource() {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
         driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
         driverManagerDataSource.setUrl("jdbc:mysql://127.0.0.1:3306/module02?serverTimezone=UTC&useSSL=false");
         driverManagerDataSource.setUsername("root");
         driverManagerDataSource.setPassword("24081984");
-        return  driverManagerDataSource;
+        return driverManagerDataSource;
     }
 
     @Bean
-    public JdbcTemplate template() {
-        return  new JdbcTemplate(dataSource());
+    @Profile("prod")
+    public DataSource dataSourceProd() {
+        DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+        driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        driverManagerDataSource.setUrl("jdbc:mysql://127.0.0.1:3306/module02?serverTimezone=UTC&useSSL=false");
+        driverManagerDataSource.setUsername("root");
+        driverManagerDataSource.setPassword("24081984");
+        return driverManagerDataSource;
     }
+
+    @Bean
+    public JdbcTemplate template(DataSource dataSource) {
+
+        return new JdbcTemplate(dataSource());
+    }
+
+
 
 
 }
