@@ -1,26 +1,35 @@
 package com.epam.esm.exception;
 
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.Locale;
+import java.util.Objects;
+
 
 
 @ControllerAdvice
 public class ApplicationExceptionHandler {
+    public static final String NO_SUCH_RESOURCE_MESSAGE = "no_id";
+    public static final String TAG_EXISTS_MESSAGE = "tag_exist";
 
-    @ExceptionHandler(NoSuchResourceException.class)
-    public ResponseEntity<ExceptionDetails> handleNoSuchResourceException(NoSuchResourceException exception) {
-        HttpStatus status = HttpStatus.NOT_FOUND;
-        String errorCode = status.value()+ exception.getCode();
-        ExceptionDetails data = new ExceptionDetails(LocalDateTime.now(), status.value(), exception.getMessage(), errorCode);
 
-        return new ResponseEntity<>(data, status);
+    private final ReloadableResourceBundleMessageSource resourceBundle;
+
+    public ApplicationExceptionHandler(ReloadableResourceBundleMessageSource resourceBundle) {
+        this.resourceBundle = resourceBundle;
     }
 
     @ExceptionHandler({InvalidDataException.class})
@@ -34,8 +43,9 @@ public class ApplicationExceptionHandler {
     @ExceptionHandler({TagAlreadyExistsException.class, SQLException.class})
     public ResponseEntity<ExceptionDetails> handleTagAlreadyExistsException(InvalidDataException exception) {
         HttpStatus status = HttpStatus.CONFLICT;
+        String message = getErrorResponse(TAG_EXISTS_MESSAGE);
         String errorCode = status.value() + exception.getCode();
-        ExceptionDetails data = new ExceptionDetails(LocalDateTime.now(), status.value(), exception.getMessage(), errorCode);
+        ExceptionDetails data = new ExceptionDetails(LocalDateTime.now(), status.value(), message, errorCode);
         return new ResponseEntity<>(data, status);
     }
 
@@ -45,6 +55,26 @@ public class ApplicationExceptionHandler {
         String errorCode = status.value() + exception.getCode();
         ExceptionDetails data = new ExceptionDetails(LocalDateTime.now(), status.value(), exception.getMessage(), errorCode);
         return new ResponseEntity<>(data, status);
+    }
+
+    @ExceptionHandler(NoSuchResourceException.class)
+    public ResponseEntity<ExceptionDetails> handleNoSuchResourceException(NoSuchResourceException exception) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        String message = getErrorResponse(NO_SUCH_RESOURCE_MESSAGE);
+        String errorCode = status.value()+ exception.getCode();
+        ExceptionDetails data = new ExceptionDetails(LocalDateTime.now()
+                , status.value(), message, errorCode);
+
+        return new ResponseEntity<>(data, status);
+    }
+
+    private String getErrorResponse(String key) {
+        HttpServletRequest request = ((ServletRequestAttributes)Objects
+                .requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+        Locale locale = request.getLocale();
+        String bundleMessage = resourceBundle.getMessage(key, new Object[]{}, locale);
+
+        return bundleMessage;
     }
 
 

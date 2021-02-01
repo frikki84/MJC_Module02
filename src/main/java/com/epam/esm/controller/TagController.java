@@ -25,7 +25,7 @@ public class TagController {
     public List<Tag> findAllCertificates() {
         List<Tag> fullTagList = tagService.findAllTagList();
         if (fullTagList == null || fullTagList.isEmpty()) {
-            throw new NoSuchResourceException("There are no tags in DataBase", CustomErrorCode.TAG);
+            throw new NoSuchResourceException(CustomErrorCode.TAG);
         }
         return fullTagList;
     }
@@ -34,16 +34,7 @@ public class TagController {
     public Tag findTag(@PathVariable("name") String name) {
         Tag tag = tagService.findTag(name);
         if (tag == null) {
-            throw new NoSuchResourceException("There is no tag with name " + name, CustomErrorCode.TAG);
-        }
-        return tag;
-    }
-
-    @GetMapping("/{id}")
-    public Tag findTag(@PathVariable("name") long id) {
-        Tag tag = tagService.findTag(id);
-        if (tag == null) {
-            throw new NoSuchResourceException("There is no tag with id " + id, CustomErrorCode.TAG);
+            throw new NoSuchResourceException(CustomErrorCode.TAG);
         }
         return tag;
     }
@@ -53,7 +44,7 @@ public class TagController {
     public Tag createNewTag(@RequestBody TagDto tag) {
         Tag createdTag = tagService.addNewTag(tag);
         if (createdTag == null) {
-            throw new TagAlreadyExistsException("This tag " + createdTag.getNameTag() + " already exists in DataBase", CustomErrorCode.TAG);
+            throw new TagAlreadyExistsException(CustomErrorCode.TAG);
         }
         return createdTag;
     }
@@ -62,7 +53,7 @@ public class TagController {
     public Integer deleteCertificate(@PathVariable("id") int id) {
         Integer fields = tagService.deleteTag(id);
         if (fields == null || fields == 0) {
-            throw new NoSuchResourceException("There is no tag with id " + id, CustomErrorCode.TAG);
+            throw new NoSuchResourceException(CustomErrorCode.TAG);
         }
         return  fields;
     }

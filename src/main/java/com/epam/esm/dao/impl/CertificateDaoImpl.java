@@ -129,7 +129,6 @@ public class CertificateDaoImpl implements CertificateDao {
             ct.setDuration((Integer)c.get("duration"));
             ct.setCreateDate(((Timestamp) c.get("create_date")).toLocalDateTime());
             ct.setLastUpdateDate(((Timestamp)c.get("last_update_date")).toLocalDateTime());
-            System.out.println("result item" + ct);
             certificateList.add(ct);
         });
 

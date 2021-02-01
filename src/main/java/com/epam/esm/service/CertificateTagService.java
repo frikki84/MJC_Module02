@@ -36,15 +36,12 @@ public class CertificateTagService {
         GiftCertificate certificate = certificateMapper.changeDtoToCertificate(dto);
         long certificateId = certificateService.createNewCertificate(certificate);
 
-        System.out.println("CertificateTagServiceImpl createNewCertificate " + certificateId);
         List<Tag> tagList = tagDtoMapper.changeCertificateDtoToTagList(dto);
-        System.out.println("taglist " + tagList);
 
         Integer resultField = 0;
 
         for (Tag tag : tagList) {
             long tagId = 0;
-            System.out.println("tag = " + tag.getNameTag() + " tagService = " + tagService.findTag(tag.getNameTag()));
             if (tagService.findTag(tag.getNameTag()) == null) {
                 tagId = tagService.addNewTag(tag).getId();
 
@@ -52,7 +49,7 @@ public class CertificateTagService {
                 tagId = tagService.findTag(tag.getNameTag()).getId();
             }
 
-           resultField += certificateTagDao.createNewCertificateTagRelation(certificateId, tagId);
+            resultField += certificateTagDao.createNewCertificateTagRelation(certificateId, tagId);
 
 
         }

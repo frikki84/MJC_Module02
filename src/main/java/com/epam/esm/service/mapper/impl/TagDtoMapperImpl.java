@@ -19,8 +19,7 @@ public class TagDtoMapperImpl implements TagDtoMapper {
 
     @Override
     public List<Tag> changeCertificateDtoToTagList(CertificateDto dto) {
-        System.out.println("dto " + dto);
-        List<Tag> tagList = dto.getTagList();
+         List<Tag> tagList = dto.getTagList();
         return tagList;
     }
 }

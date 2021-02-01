@@ -34,7 +34,7 @@ public class CertificatesController {
     public GiftCertificate findCertificateById(@PathVariable("id") long id) {
         GiftCertificate certificate = certificateService.findCertificateById(id);
         if (certificate == null) {
-            throw new NoSuchResourceException("There is no cerfificate with id " + id, CustomErrorCode.CERTIFICATE);
+            throw new NoSuchResourceException(CustomErrorCode.CERTIFICATE);
         }
         return certificate;
     }
@@ -56,7 +56,7 @@ public class CertificatesController {
         Integer updatesNumber = certificateService.updateCertificate(certificate, id);
 
         if (updatesNumber == null) {
-            throw  new NoSuchResourceException("No certificate with id " + id, CustomErrorCode.CERTIFICATE);
+            throw  new NoSuchResourceException(CustomErrorCode.CERTIFICATE);
         }
         return updatesNumber;
     }
@@ -64,8 +64,8 @@ public class CertificatesController {
     @DeleteMapping("/{id}")
     public Integer deleteCertificate(@PathVariable("id") int id) {
         Integer deleteFields = certificateService.deleteCertificate(id);
-        if (deleteFields == null) {
-            throw  new NoSuchResourceException("No certificate with id " + id, CustomErrorCode.CERTIFICATE);
+        if (deleteFields == null || deleteFields == 0) {
+            throw  new NoSuchResourceException(CustomErrorCode.CERTIFICATE);
         }
         return deleteFields;
     }
@@ -74,7 +74,7 @@ public class CertificatesController {
     public List<CertificateDto> findCertificatesByTag(@PathVariable("tagName") String tagName) {
         List<CertificateDto> certificateList = certificateService.findCertificatesByTagName(tagName);
         if (certificateList.isEmpty()) {
-            throw new NoSuchResourceException("No certificates with tag " + tagName, CustomErrorCode.CERTIFICATE);
+            throw new NoSuchResourceException(CustomErrorCode.CERTIFICATE);
         }
         return certificateList;
     }

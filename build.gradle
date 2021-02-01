@@ -1,12 +1,11 @@
- plugins {
+plugins {
     id 'java'
-     id 'war'
+    id 'war'
 }
 
 
 group 'com.epam.esm'
 version '1.0'
-
 
 repositories {
     mavenCentral()
@@ -40,10 +39,6 @@ dependencies {
     testCompile group: 'org.mockito', name: 'mockito-inline', version: '3.7.7'
     testCompile group: 'org.junit.platform', name: 'junit-platform-runner', version: '1.7.0'
     testCompile group: 'org.mockito', name: 'mockito-junit-jupiter', version: '3.7.7'
-
-
-
-
 
 }
 

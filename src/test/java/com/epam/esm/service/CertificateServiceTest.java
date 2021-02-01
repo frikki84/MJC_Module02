@@ -126,48 +126,4 @@ class CertificateServiceTest {
     }
 
 
-    @Test
-    void findCertificatesByTagName() {
-//        String tagName = "spa";
-//
-//        List<GiftCertificate> certificateList = new ArrayList<>();
-//        certificateList.add(new GiftCertificate(1, "Spa-comlex", "Spa-complex for 1 person for 3 hours"
-//                , new BigDecimal(150), 40, LocalDateTime.of(2021, 01, 20, 13
-//                , 06, 22), LocalDateTime.of(2021, 01, 20, 13, 06, 22)));
-//        certificateList.add(new GiftCertificate(2, "Spa-comlex", "Spa-complex for 2 persons for 3 hours"
-//                , new BigDecimal(250), 40, LocalDateTime.of(2021, 01, 20, 13
-//                , 06, 22), LocalDateTime.of(2021, 01, 20, 13, 06, 22)));
-//        certificateList.add(new GiftCertificate(3, "Spa-comlex", "Spa-complex for 4 persons for 3 hours"
-//                , new BigDecimal(350), 40, LocalDateTime.of(2021, 01, 20, 13
-//                , 06, 22), LocalDateTime.of(2021, 01, 20, 13, 06, 22)));
-//
-//        List<Tag> tagList = Arrays.asList(new Tag(1, "spa"), new Tag(2, "relax"), new Tag(3, "group"));
-//
-//        List<CertificateDto> dtoList = new ArrayList<>();
-//        certificateList.stream().forEach(
-//                certificate ->
-//                dtoList.add(new CertificateDto(certificate, tagList))
-//        );
-//
-//        System.out.println("dto\n" + dtoList);
-//
-//        Mockito.when(certificateMapper.changeCertificateToDto(certificateList.get(0), tagList)).thenReturn(dtoList.get(0));
-//        Mockito.when(certificateMapper.changeCertificateToDto(certificateList.get(1), tagList)).thenReturn(dtoList.get(1));
-//        Mockito.when(certificateMapper.changeCertificateToDto(certificateList.get(2), tagList)).thenReturn(dtoList.get(2));
-//
-//        List<CertificateDto> resultList = certificateService.findCertificatesByTagName(tagName);
-//        System.out.println(resultList);
-//        Assertions.assertEquals(3, resultList.size());
-    }
-
-
-    @Test
-    void sortAllCertificatesByNameAsc() {
-
-    }
-
-
-    @Test
-    void findAllCertificatesWithTagsByNameOrDescriptionPart() {
-    }
 }

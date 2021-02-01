@@ -44,6 +44,7 @@ public class ExceptionDetails {
     }
 
     public void setErrorMessage(String errorMessage) {
+
         this.errorMessage = errorMessage;
     }
 

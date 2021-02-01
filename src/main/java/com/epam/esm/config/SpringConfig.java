@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -50,6 +51,15 @@ public class SpringConfig {
     @Bean
     public PlatformTransactionManager txManager(DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
+    }
+
+    @Bean
+    public ReloadableResourceBundleMessageSource messageSource() {
+        ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
+        source.setBasename("classpath:localization/message");
+        source.setDefaultEncoding("UTF-8");
+        source.setUseCodeAsDefaultMessage(true);
+        return source;
     }
 
 
